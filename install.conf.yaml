@@ -1,6 +1,38 @@
-- clean: []
-- link: {}
+- defaults:
+    link:
+        create: true
+        relink: true
+
+- clean: ['~', '~/.config']
+
+- link:
+    ~/.config/alacritty/alacritty.yml:
+        path: config/alacritty/alacritty.yml
+    ~/.config/broot/conf.hjson:
+        path: config/broot/conf.hjson
+    ~/.config/kak-lsp/kak-lsp.toml:
+        path: config/kak-lsp/kak-lsp.toml
+    ~/.config/kak:
+        path: config/kak
+        force: true
+
+    ~/.config/sway/config:
+        path: config/sway/config
+        force: true
+    ~/.config/sway/definitions.d/user_definition.conf:
+        path: i3/definition.conf
+    ~/.config/sway/modes/:
+        path: i3/modes/*
+        create: true
+        glob: true
+    ~/.config/sway/config.d/:
+        path: i3/config.d/*
+        create: true
+        glob: true
+    ~/.config/sway/workspace-3.json:
+        path: i3/workspace-3.json
 - create:
-        - ~/.themes/
-        - ~/.local/bin/
-- shell: []
+    - ~/.themes/
+    - ~/.local/bin/
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]
