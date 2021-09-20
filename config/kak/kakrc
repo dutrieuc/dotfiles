@@ -44,8 +44,10 @@ set global tabstop 4
 set global indentwidth 4
 
 # Auto-pair
-set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
-enable-auto-pairs
+plug "alexherbo2/auto-pairs.kak" %{
+    set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
+    enable-auto-pairs
+}
 
 # --- Commands
  
@@ -64,8 +66,9 @@ define-command -override fzf-buffers %{
 }
 
 # Windowing
-alacritty-integration-enable
-
+plug "alexherbo2/alacritty.kak" %{
+    alacritty-integration-enable
+}
 
 # --- Mapping 
 

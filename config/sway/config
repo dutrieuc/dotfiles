@@ -20,8 +20,8 @@ include /etc/sway/inputs/*
 include /etc/sway/outputs/*
 
 # enable modes
-#include /.config/sway/modes/*
-include /etc//sway/modes/*
+include ~/.config/sway/modes/*
+#include /etc//sway/modes/*
 
 # only enable this if every app you use is compatible with wayland
 # xwayland disable

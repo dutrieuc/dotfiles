@@ -15,6 +15,11 @@
     ~/.config/kak:
         path: config/kak
         force: true
+    ~/.config/kak/colors/:
+        path: themes/kakoune/colors/*
+        glob: true
+    ~/.config/kak/plugins/powerline.kak/rc/themes/dracula.kak:
+        path: themes/kakoune_powerline/dracula.kak
 
     ~/.config/sway/config:
         path: config/sway/config
