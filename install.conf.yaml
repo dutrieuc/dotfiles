@@ -8,6 +8,7 @@
 - link:
     ~/.zshrc:
         force: true
+    ~/.gitconfig:
     ~/.scripts:
     ~/.config/alacritty/alacritty.yml:
         path: config/alacritty/alacritty.yml
@@ -40,7 +41,6 @@
     ~/.config/sway/workspace-3.json:
         path: i3/workspace-3.json
 - create:
-    - ~/.themes/
     - ~/.local/bin/
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
