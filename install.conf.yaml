@@ -6,6 +6,9 @@
 - clean: ['~', '~/.config']
 
 - link:
+    ~/.zshrc:
+        force: true
+    ~/.scripts:
     ~/.config/alacritty/alacritty.yml:
         path: config/alacritty/alacritty.yml
     ~/.config/broot/conf.hjson:
