@@ -2,3 +2,15 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 	ignore = dirty
+[submodule "themes/dunst"]
+	path = themes/dunst
+	url = https://github.com/dracula/dunst.git
+[submodule "themes/kakoune"]
+	path = themes/kakoune
+	url = git@github.com:dutrieuc/kakoune.git
+[submodule "themes/rofi"]
+	path = themes/rofi
+	url = https://github.com/dracula/rofi
+[submodule "themes/zsh"]
+	path = themes/zsh
+	url = https://github.com/dracula/zsh.git

@@ -1,0 +1,7 @@
+[user]
+	email = cydu@odoo.com
+	name = Cyril Dutrieux (cydu)
+[core]
+	editor = kak
+[alias]
+	g = grep --break --heading --line-number

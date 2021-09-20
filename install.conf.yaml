@@ -1,3 +1,6 @@
 - clean: []
 - link: {}
+- create:
+        - ~/.themes/
+        - ~/.local/bin/
 - shell: []
