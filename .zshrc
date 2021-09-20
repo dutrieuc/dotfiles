@@ -9,6 +9,7 @@ fi
 if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
+source ~/.dotfiles/zsh/p10k.zsh
 
 # broot
 source /home/dutrieux/.config/broot/launcher/bash/br
