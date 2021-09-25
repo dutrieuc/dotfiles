@@ -5,18 +5,19 @@
 # Read `man 5 sway` for a complete reference.
 
 # styles - set the folder for your theme defination file
-set $theme /usr/share/sway/themes/matcha-green
+include $HOME/.dotfiles/themes/base16-sway/themes/base16-dracula.config
+include $HOME/.config/sway/template
 
 #theme variables
-include $theme/definitions
-
-# global variables
-include /etc/sway/definitions
 
 # user variables
-include $HOME/.config/sway/definitions.d/*.conf
+include $HOME/.config/sway/definitions.d/user_definition.conf
 
 include /etc/sway/inputs/*
+input * {
+    xkb_layout gb,fr
+    xkb_options "caps:swapescape"
+}
 include /etc/sway/outputs/*
 
 # enable modes

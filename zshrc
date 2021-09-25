@@ -11,9 +11,6 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
 fi
 source ~/.dotfiles/zsh/p10k.zsh
 
-# broot
-source /home/dutrieux/.config/broot/launcher/bash/br
-
 # FZF config
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -68,3 +65,5 @@ alias KK='K --working-directory .'
 alias :cat='kcr cat --raw'
 
 alias dev-setup="~/.scripts/dev-setup-cr.sh"                    # setup dev workspace
+
+source $HOME/.config/broot/launcher/bash/br

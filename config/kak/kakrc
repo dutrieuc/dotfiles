@@ -1,6 +1,8 @@
 # Plugins
 evaluate-commands %sh{
     kcr init kakoune
+}
+evaluate-commands %sh{
     kak-lsp --kakoune -s $kak_session
 }
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
@@ -26,7 +28,7 @@ plug "schemar/kak-jsts" config %{
 
 # CSV
 plug "gspia/csv.kak" %{
-	set-option global csv_sep ','
+    set-option global csv_sep ','
 }
 
 # Clippy

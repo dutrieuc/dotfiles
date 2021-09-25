@@ -40,6 +40,9 @@
         glob: true
     ~/.config/sway/workspace-3.json:
         path: i3/workspace-3.json
+
+    ~/.config/rofi/config.rasi:
+        path: themes/rofi/theme/config1.rasi
 - create:
     - ~/.local/bin/
 - shell:

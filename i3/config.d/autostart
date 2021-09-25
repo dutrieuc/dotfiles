@@ -13,6 +13,8 @@ exec --no-startup-id start_conky_maia
 exec --no-startup-id xautolock -time 10 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+exec eval $(gnome-keyring-daemon --start)
+
 
 # Dual monitor config
 exec ~/.screenlayout/default.sh
@@ -20,7 +22,7 @@ exec ~/.screenlayout/default.sh
 # Startup apps
 assign [class="discord"] $ws3
 exec --no-startup-id "i3-msg 'workspace 2; workspace 3; append_layout /home/dutrieux/.i3/workspace-3.json'"
-exec aw-qt
+#exec --no-startup-id aw-qt
 exec spotify
 for_window [class="Spotify"] move to workspace $ws5
 exec --no-startup-id $HOME/.scripts/startup.sh

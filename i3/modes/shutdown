@@ -1,12 +1,11 @@
 set $mode_shutdown "\
 <span foreground='$color10'></span>  \
 <span foreground='$color5'> \
-<span foreground='$color10'>(<b>h</b>)</span>hibernate \
 <span foreground='$color10'>(<b>l</b>)</span>lock \
 <span foreground='$color10'>(<b>e</b>)</span>logout \
 <span foreground='$color10'>(<b>r</b>)</span>reboot \
-<span foreground='$color10'>(<b>u</b>)</span>suspend \
-<span foreground='$color10'>(<b>s</b>)</span>shutdown \
+<span foreground='$color10'>(<b>s</b>)</span>suspend \
+<span foreground='$color10'>(<b>h</b>)</span>shutdown \
 </span>"
 
 mode --pango_markup $mode_shutdown {
@@ -17,13 +16,10 @@ mode --pango_markup $mode_shutdown {
     $bindsym e exec loginctl terminate-user $USER
 
     # suspend
-    $bindsym u mode "default", exec systemctl suspend
-
-    # hibernate
-    $bindsym h mode "default", exec systemctl hibernate
+    $bindsym s mode "default", exec systemctl suspend
 
     # shutdown
-    $bindsym s exec systemctl poweroff
+    $bindsym h exec systemctl poweroff
 
     # reboot
     $bindsym r exec systemctl reboot

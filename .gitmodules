@@ -20,3 +20,9 @@
 [submodule "repositories/kakoune.cr"]
 	path = repositories/kakoune.cr
 	url = https://github.com/alexherbo2/kakoune.cr.git
+[submodule "themes/base16-sway"]
+	path = themes/base16-sway
+	url = https://github.com/rkubosz/base16-sway.git
+[submodule "themes/base16-waybar"]
+	path = themes/base16-waybar
+	url = https://github.com/mnussbaum/base16-waybar.git
