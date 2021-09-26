@@ -118,9 +118,8 @@ hook global RegisterModified '"' %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | xsel --input --clipboard  -docstring 'copy before'
 }}
 # ,p paste from sys clipboard
-map global user y '<a-|>xsel -i -b<ret>' -docstring 'copy to sys clipboard'
-map global user P '!xsel --output --clipboard<ret>' -docstring 'paste'
-map global user p '<a-!>xsel --output --clipboard<ret>' -docstring 'paste before'
+map global user P '!wl-paste --no-newline<ret>' -docstring 'paste'
+map global user p '<a-!>wl-paste --no-newline<ret>' -docstring 'paste before'
 
 hook global RegisterModified '"' %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
