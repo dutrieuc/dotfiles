@@ -1,11 +1,11 @@
 set $mode_shutdown "\
-<span foreground='$color10'></span>  \
-<span foreground='$color5'> \
-<span foreground='$color10'>(<b>l</b>)</span>lock \
-<span foreground='$color10'>(<b>e</b>)</span>logout \
-<span foreground='$color10'>(<b>r</b>)</span>reboot \
-<span foreground='$color10'>(<b>s</b>)</span>suspend \
-<span foreground='$color10'>(<b>h</b>)</span>shutdown \
+<span foreground='$base0A'></span>  \
+<span foreground='$base05'> \
+<span foreground='$base0A'>(<b>l</b>)</span>lock \
+<span foreground='$base0A'>(<b>e</b>)</span>logout \
+<span foreground='$base0A'>(<b>r</b>)</span>reboot \
+<span foreground='$base0A'>(<b>s</b>)</span>suspend \
+<span foreground='$base0A'>(<b>h</b>)</span>shutdown \
 </span>"
 
 mode --pango_markup $mode_shutdown {

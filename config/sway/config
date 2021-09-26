@@ -31,4 +31,4 @@ include ~/.config/sway/modes/*
 include /etc/sway/config.d/*
 
 # user config
-include $HOME/.config/sway/config.d/*.conf
+include $HOME/.config/sway/config.d/*
