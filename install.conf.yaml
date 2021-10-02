@@ -40,6 +40,8 @@
         glob: true
     ~/.config/sway/workspace-3.json:
         path: i3/workspace-3.json
+    /etc/interception/udevmon.yaml:
+        path: systemd/caps2esc/udevmon.yaml
 
     ~/.config/rofi/config.rasi:
         path: themes/rofi/theme/config1.rasi

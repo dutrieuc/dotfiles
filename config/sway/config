@@ -16,7 +16,7 @@ include $HOME/.config/sway/definitions.d/user_definition.conf
 include /etc/sway/inputs/*
 input * {
     xkb_layout gb,fr
-    xkb_options "caps:swapescape"
+#    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
 
