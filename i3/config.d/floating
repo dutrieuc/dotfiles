@@ -31,3 +31,4 @@ for_window [class="Xfburn"] floating enable
 
 for_window [class="popup"] floating enable
 for_window [instance="popup"] floating enable
+for_window [app_id="popup"] floating enable
