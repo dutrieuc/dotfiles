@@ -15,7 +15,8 @@ include $HOME/.config/sway/definitions.d/user_definition.conf
 
 include /etc/sway/inputs/*
 input * {
-    xkb_layout gb,fr
+    xkb_layout us,fr
+    xkb_options "grp:ctrls_toggle,compose:prsc"
 #    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
