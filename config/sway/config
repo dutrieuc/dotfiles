@@ -20,6 +20,9 @@ input * {
 #    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
+output eDP-1 pos 3840 0
+output DP-6 pos 1920 0
+output HDMI-A-1 pos 0 0
 
 # enable modes
 include ~/.config/sway/modes/*
