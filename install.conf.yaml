@@ -10,6 +10,7 @@
         force: true
     ~/.gitconfig:
     ~/.scripts:
+    ~/.profile:
     ~/.config/alacritty/alacritty.yml:
         path: config/alacritty/alacritty.yml
     ~/.config/broot/conf.hjson:
