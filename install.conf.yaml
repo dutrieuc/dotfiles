@@ -48,6 +48,9 @@
 
     ~/.config/rofi/config.rasi:
         path: themes/rofi/theme/config1.rasi
+
+    ~/.config/spotifyd/spotifyd.conf:
+        path: config/spotifyd/spotifyd.conf
 - create:
     - ~/.local/bin/
 - shell:
