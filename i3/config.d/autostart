@@ -2,7 +2,8 @@
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
 exec eval $(gnome-keyring-daemon --start)
+exec --no-startup-id aw-qt
 
 # Startup apps
-assign [class="discord"] $ws3
-exec --no-startup-id aw-qt
+assign [class="discord"] $ws1
+exec $HOME/.scripts/startup-sway
