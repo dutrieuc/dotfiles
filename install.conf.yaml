@@ -25,6 +25,8 @@
         glob: true
     ~/.config/kak/plugins/powerline.kak/rc/themes/dracula.kak:
         path: themes/kakoune_powerline/dracula.kak
+    ~/.config/pycodestyle:
+        path: config/pycodestyle
 
     ~/.config/sway/config:
         path: config/sway/config
