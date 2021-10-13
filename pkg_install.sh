@@ -5,5 +5,6 @@ pip install python-lsp-server python-lsp-black pyflakes mccabe pycodestyle rope
 sudo systemclt enable udevmon.service
 sudo systemclt start udevmon.service
 broot --install
-cd ~/.dotfiles//repositories/kakoune.cr/
+cd ~/.dotfiles/repositories/kakoune.cr/
 make install
+git clone https://github.com/andreyorst/plug.kak.git $HOME/.config/kak/plugins/plug.kak

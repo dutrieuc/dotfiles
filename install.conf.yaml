@@ -17,8 +17,8 @@
         path: config/broot/conf.hjson
     ~/.config/kak-lsp/kak-lsp.toml:
         path: config/kak-lsp/kak-lsp.toml
-    ~/.config/kak:
-        path: config/kak
+    ~/.config/kak/kakrc:
+        path: config/kak/kakrc
         force: true
     ~/.config/kak/colors/:
         path: themes/kakoune/colors/*
@@ -53,5 +53,6 @@
         path: config/spotifyd/spotifyd.conf
 - create:
     - ~/.local/bin/
+    - ~/.config/kak/plugins/
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
