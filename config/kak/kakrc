@@ -31,6 +31,10 @@ plug "gspia/csv.kak" %{
     set-option global csv_sep ','
 }
 
+plug "alexherbo2/show-characters.kak" %{
+    show-characters
+}
+
 # Clippy
 set global ui_options terminal_assistant=none
 
@@ -106,33 +110,8 @@ plug 'delapouite/kakoune-buffers' %{
     map global normal <a-Q> <a-B>
     map global normal b ': enter-buffers-mode<ret>' -docstring 'buffers'
     map global normal B ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
-    # Suggested aliases
-
-  #  hook global WinDisplay .* info-buffers
-  #  alias global bd delete-buffer
-  #  alias global bf buffer-first    
-  #  alias global bl buffer-last
-  #  alias global bo buffer-only
-  #  alias global bo! buffer-only-force
-  #  #TODO change b and q, see the plugin git rep
 }
 
-plug 'ul/kak-tree' do %{
-        cargo install --force --path . --features 'html php javascript css'
-} config %{
-    set global tree_cmd 'kak-tree -c ~/.config/kak-tree/kak-tree.toml'
-
-    declare-user-mode tree
-    map global user t ': enter-user-mode tree<ret>' -docstring 'enter treesitter mode'
-    map global user T ': enter-user-mode -lock tree<ret>' -docstring 'enter treesitter mode locked'
-    map global tree p ': tree-select-parent-node<ret>' -docstring 'select parent node'
-    map global tree u ': tree-select-parent-node<ret>' -docstring 'parent'
-    map global tree n ': tree-select-next-node<ret>' -docstring 'next'
-    map global tree p ': tree-select-previous-node<ret>' -docstring 'previous'
-    map global tree c ': tree-select-children<ret>' -docstring 'children'
-    map global tree f ': tree-select-first-child<ret>' -docstring 'first child'
-    map global tree t ': tree-node-sexp<ret>' -docstring 'show syntax tree'
-}
 
 # System clipboard
 hook global RegisterModified '"' %{ nop %sh{
@@ -143,3 +122,16 @@ map global user y '<a-|>xsel -i -b<ret>' -docstring 'copy to sys clipboard'
 map global user P '!xsel --output --clipboard<ret>' -docstring 'paste'
 map global user p '<a-!>xsel --output --clipboard<ret>' -docstring 'paste before'
 
+hook global RegisterModified '"' %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
+}}
+
+declare-user-mode odoo
+map global user o ': enter-user-mode odoo<ret>' -docstring 'enter odoo mode'
+define-command oscout-popup %{
+  connect popup sh -c %{
+    cd ~/source-odoo/;
+    oscout
+  }
+}
+map global odoo o ': oscout-popup<ret>' -docstring 'search'
