@@ -1,0 +1,1 @@
+enter:execute(kcr edit {1} +{2}:{3})+accept

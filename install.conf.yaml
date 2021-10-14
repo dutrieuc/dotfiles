@@ -27,6 +27,8 @@
         path: themes/kakoune_powerline/dracula.kak
     ~/.config/pycodestyle:
         path: config/pycodestyle
+    ~/.config/oscout/bindings:
+        path: config/oscout/bindings
 
     ~/.config/sway/config:
         path: config/sway/config
