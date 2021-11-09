@@ -39,6 +39,8 @@
         force: true
     ~/.config/sway/definitions.d/user_definition.conf:
         path: i3/definition.conf
+    ~/.config/sway/template:
+        path: i3/template
     ~/.config/sway/modes/:
         path: i3/modes/*
         create: true

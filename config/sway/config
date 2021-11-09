@@ -20,16 +20,19 @@ input * {
 #    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
-output eDP-1 pos 3840 0
-output DP-6 pos 1920 0
-output DP-7 pos 0 0
+# laptop screen
+output eDP-1 pos 3840 1080
+output DP-6 pos 1920 1080
+output DP-7 pos 0 1080
+# bare thunderbolt, atop
+# output DP-6 pos 3840 0
 
 # enable modes
 include ~/.config/sway/modes/*
 #include /etc//sway/modes/*
 
 # only enable this if every app you use is compatible with wayland
-xwayland disable
+#xwayland disable
 
 # include additional configs e.g. to autostart applications
 include /etc/sway/config.d/*
