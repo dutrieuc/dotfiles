@@ -8,9 +8,13 @@
 - link:
     ~/.zshrc:
         force: true
+    ~/.config/zsh/p10k.zsh:
+        path: zsh/p10k.zsh
+
     ~/.gitconfig:
     ~/.scripts:
     ~/.profile:
+        force: true
     ~/.config/alacritty/alacritty.yml:
         path: config/alacritty/alacritty.yml
     ~/.config/broot/conf.hjson:

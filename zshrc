@@ -9,7 +9,7 @@ fi
 if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
-source ~/.dotfiles/zsh/p10k.zsh
+source ~/.config/zsh/p10k.zsh
 
 # FZF config
 source /usr/share/fzf/key-bindings.zsh
