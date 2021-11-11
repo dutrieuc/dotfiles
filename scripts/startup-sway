@@ -1,7 +1,8 @@
+swaymsg "exec aw-qt"
 swaymsg "workspace 1; layout stacking"
 sleep 3.5s
 swaymsg "
-    exec thunderbird; 
-    exec firefox -new-window -url https://chat.google.com -new-tab -url https://discord.com/channels/@me -url https://www.odoo.com/web;
-    exec discord;
+    exec thunderbird;
+    exec firefox
 ";
+swaymsg "exec aw-watcher-window-wayland"
