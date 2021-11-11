@@ -60,9 +60,13 @@ alias ks='kcr shell --session'
 alias K='kcr-fzf-shell'
 alias a='kcr attach'
 alias k='kcr edit'
-alias kl='kcr list'
+alias kl='kcr list' -U
 alias KK='K --working-directory .'
 alias :cat='kcr cat --raw'
+
+# odev completion
+fpath=($HOME/.zsh-completions $fpath)
+compinit
 
 alias dev-setup="~/.scripts/dev-setup-cr.sh"                    # setup dev workspace
 

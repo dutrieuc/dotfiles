@@ -1,1 +1,2 @@
-enter:execute(kcr edit {1} +{2}:{3})+accept
+enter:execute(kcr edit {1} +{2}:{3})
+ctrl-alt-m:execute(kcr edit {1} +{2}:{3})+accept

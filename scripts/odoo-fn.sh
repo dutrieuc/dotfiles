@@ -10,9 +10,9 @@ export-scaffold () {
 }
 
 odrr () {
-  odev run "$@" --dev=xml,reload --log-handler odoo.addons.base.models.ir_attachment:WARNING
+  odev "$@" --dev=xml,reload --log-handler odoo.addons.base.models.ir_attachment:WARNING
 }
 
 odr () {
-  odev run "$@" --log-handler odoo.addons.base.models.ir_attachment:WARNING
+  odev "$@" --log-handler odoo.addons.base.models.ir_attachment:WARNING
 }
