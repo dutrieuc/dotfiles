@@ -13,6 +13,10 @@
 
     ~/.gitconfig:
     ~/.scripts:
+    ~/.local/bin:
+        path: localbin/*
+        create: true
+        glob: true
     ~/.profile:
         force: true
     ~/.config/alacritty/alacritty.yml:
