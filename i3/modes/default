@@ -23,7 +23,7 @@ bindsym $mod+d exec --no-startup-id dmenu_recency
 bindsym $mod+space exec rofi -show run
 
 # windows by name
-bindsym $mod+Ctrl+space exec rofi -show window
+bindsym $mod+Ctrl+space exec i3-focus-last menu
 
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
@@ -67,6 +67,7 @@ bindsym $mod+t exec --no-startup-id pkill picom
 bindsym $mod+Ctrl+t exec --no-startup-id picom -b
 bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+c exec $terminal --class popup -e "toggl-task"
 
 focus_follows_mouse no
 
@@ -114,7 +115,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+p toggle
+bindsym $mod+Shift+p floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+p focus mode_toggle

@@ -16,16 +16,18 @@ include $HOME/.config/sway/definitions.d/user_definition.conf
 include /etc/sway/inputs/*
 input * {
     xkb_layout us,fr
-    xkb_options "grp:ctrls_toggle,compose:prsc"
+    xkb_options "grp:ctrls_toggle,compose:ralt"
 #    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
 # laptop screen
-output eDP-1 pos 3840 1080
-output DP-6 pos 1920 1080
-output DP-7 pos 0 1080
+output eDP-1 pos 3840 2080
+output DP-6 pos 1920 2080
+output DP-7 pos 0 2080
 # bare thunderbolt, atop
 # output DP-6 pos 3840 0
+# bare hdmi, left
+output HDMI-A-1 pos 3840 640
 
 # enable modes
 include ~/.config/sway/modes/*

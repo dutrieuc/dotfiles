@@ -19,7 +19,7 @@ mode --pango_markup $mode_shutdown {
     $bindsym s mode "default", exec systemctl suspend
 
     # shutdown
-    $bindsym h exec systemctl poweroff
+    $bindsym h exec toggl stop, exec systemctl poweroff
 
     # reboot
     $bindsym r exec systemctl reboot

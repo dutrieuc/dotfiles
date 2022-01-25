@@ -1,8 +1,6 @@
-swaymsg "exec aw-qt"
 swaymsg "workspace 1; layout stacking"
 sleep 3.5s
 swaymsg "
     exec thunderbird;
     exec firefox
 ";
-swaymsg "exec aw-watcher-window-wayland"
