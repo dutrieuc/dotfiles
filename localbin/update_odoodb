@@ -1,0 +1,6 @@
+#!/bin/sh
+db=$(ps aux | grep -E 'odoo-bin -d' | awk 'NR==1{{print $14}}')
+odoo_mods=$(ls -p | grep / | sed 's/\(.*\)\//\1/' | tr '\n' ',')
+odev run $db -u $odoo_mods --st
+echo -e "odev run $db -u $odoo_mods --st
+Done."

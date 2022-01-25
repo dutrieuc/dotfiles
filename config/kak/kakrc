@@ -8,6 +8,9 @@ evaluate-commands %sh{
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
 
+plug "kakoune-editor/kakoune-extra-filetypes"
+plug "https://gitlab.com/Screwtapello/kakoune-inc-dec"
+
 
 # --- Options
 # Theme
@@ -19,6 +22,10 @@ plug "andreyorst/powerline.kak" defer powerline_dracula %{
 } config %{
     powerline-start
 }
+
+set-option global grepcmd 'rg -Hn --no-heading'
+set-option global makecmd 'update_odoodb'
+
 # Eslint JS
 plug "schemar/kak-jsts" config %{
     hook global WinSetOption filetype=(javascript|typescript) %{
@@ -31,12 +38,18 @@ plug "gspia/csv.kak" %{
     set-option global csv_sep ','
 }
 
-plug "alexherbo2/show-characters.kak" %{
-    show-characters
-}
+# plug "alexherbo2/show-characters.kak" %{
+#     show-characters
+# }
 
 # Clippy
 set global ui_options terminal_assistant=none
+
+hook global WinSetOption filetype=(plain|text|markdown|rst|ms|org) %{
+    set window autowrap_column 72
+    autowrap-enable
+    map buffer normal = "|fmt -w $kak_opt_autowrap_column<ret>"
+}
 
 # LSP
 lsp-enable
@@ -55,18 +68,19 @@ plug "alexherbo2/auto-pairs.kak" %{
     enable-auto-pairs
 }
 
+set-option global autoreload yes
 # --- Commands
  
 # fzf
 
 define-command -override fzf-files %{
-  connect popup sh -c %{
+  connect terminal-popup sh -c %{
     fzf --preview 'cat {}' | xargs kcr edit --
   }
 }
 
 define-command -override fzf-buffers %{
-  connect popup sh -c %{
+  connect terminal-popup sh -c %{
     kcr get --raw --value buflist | fzf --preview 'kcr cat --raw {}' | xargs kcr send buffer --
   }
 }
@@ -87,11 +101,11 @@ map -docstring 'reload kakrc' global normal <F5> ':source-kakrc; echo reloaded k
 map -docstring 'client' global normal <c-t> ':new<ret>'
 map -docstring 'terminal' global normal <c-n> ':connect-terminal<ret>'
 # map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'
-map -docstring 'file picker' global normal <c-f> ':connect popup kcr fzf files<ret>'
-map -docstring 'buffer picker' global normal <c-b> ':connect popup kcr fzf buffers<ret>'
-map -docstring 'grep picker' global normal <c-g> ':connect popup kcr fzf grep<ret>'
-map -docstring 'grep picker (buffer)' global normal <c-r> ':connect popup kcr fzf grep %val{buflist}<ret>'
-map -docstring 'git' global normal <c-l> ':connect popup lazygit &<ret>'
+map -docstring 'file picker' global normal <c-f> ':connect terminal-popup kcr fzf files<ret>'
+map -docstring 'buffer picker' global normal <c-b> ':connect terminal-popup kcr fzf buffers<ret>'
+map -docstring 'grep picker' global normal <c-g> ':connect terminal-popup kcr fzf grep<ret>'
+map -docstring 'grep picker (buffer)' global normal <c-r> ':connect terminal-popup kcr fzf grep %val{buflist}<ret>'
+map -docstring 'git' global normal <c-l> ':connect terminal-popup lazygit &<ret>'
 # - User mode 
 
 # i3
@@ -114,9 +128,7 @@ plug 'delapouite/kakoune-buffers' %{
 
 
 # System clipboard
-hook global RegisterModified '"' %{ nop %sh{
-  printf %s "$kak_main_reg_dquote" | xsel --input --clipboard  -docstring 'copy before'
-}}
+# 
 # ,p paste from sys clipboard
 map global user P '!wl-paste --no-newline<ret>' -docstring 'paste'
 map global user p '<a-!>wl-paste --no-newline<ret>' -docstring 'paste before'
@@ -128,9 +140,10 @@ hook global RegisterModified '"' %{ nop %sh{
 declare-user-mode odoo
 map global user o ': enter-user-mode odoo<ret>' -docstring 'enter odoo mode'
 define-command oscout-popup %{
-  connect popup sh -c %{
+  connect terminal-popup sh -c %{
     cd ~/source-odoo/;
     oscout
   }
 }
 map global odoo o ': oscout-popup<ret>' -docstring 'search'
+map global odoo m ': make<ret>' -docstring 'make'

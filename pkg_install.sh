@@ -1,6 +1,7 @@
-sudo pacman -Syu base-devel alacritty kakoune ripgrep fd bat ttf-meslo-nerd-font-powerlevel10k crystal shards jq broot fzf gnome-keyring libsecret yay interception-caps2esc
+sudo pacman -Syu base-devel alacritty kakoune ripgrep fd bat ttf-meslo-nerd-font-powerlevel10k crystal shards jq broot fzf gnome-keyring libsecret yay interception-caps2esc python-lsp-black
 yay -S flow lemminx ant-dracula-gtk-theme ant-dracula-kvantum-theme-git activitywatch-bin dracula-alacritty-git interception-space2meta
-pip install python-lsp-server python-lsp-black pyflakes mccabe pycodestyle rope
+
+# TODO in pamac pip install python-lsp-server python-lsp-black pyflakes mccabe pycodestyle rope
 
 sudo systemctl enable udevmon.service
 sudo systemctl start udevmon.service

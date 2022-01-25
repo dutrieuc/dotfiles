@@ -222,6 +222,7 @@ command = "pylsp"
 offset_encoding = "utf-8"
 [language.python.settings]
 "pylsp.configurationSources" = ["python-lsp-black","pyflakes","mccabe","pycodestyle","rope"]
+# "pylsp.configurationSources" = ["python-lsp-black","pyflakes","mccabe","pycodestyle","rope"]
 # See https://github.com/palantir/python-language-server#configuration
 # and https://github.com/palantir/python-language-server/blob/develop/vscode-client/package.json
 
@@ -322,7 +323,7 @@ args = [
         "-XX:+UseStringDeduplication",  # enable string deduplication optimisation
 
     "-jar",
-    "/opt/lemminx/org.eclipse.lemminx/target/org.eclipse.lemminx-uber.jar"
+    "/usr/share/java/lemminx/lemminx-0.18.2.jar"
 ]
 # Semantic tokens support
 # See https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_semanticTokens

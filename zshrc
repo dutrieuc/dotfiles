@@ -68,6 +68,11 @@ alias :cat='kcr cat --raw'
 fpath=($HOME/.zsh-completions $fpath)
 compinit
 
-alias dev-setup="~/.scripts/dev-setup-cr.sh"                    # setup dev workspace
-
 source $HOME/.config/broot/launcher/bash/br
+#compdef toggl
+_toggl() {
+  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _TOGGL_COMPLETE=complete-zsh  toggl)
+}
+if [[ "$(basename -- ${(%):-%x})" != "_toggl" ]]; then
+  compdef _toggl toggl
+fi
