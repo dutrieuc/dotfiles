@@ -55,6 +55,9 @@
         glob: true
     ~/.config/sway/workspace-3.json:
         path: i3/workspace-3.json
+    ~/.config/kanshi/config:
+        path: kanshi/config
+
     /etc/interception/udevmon.yaml:
         path: systemd/caps2esc/udevmon.yaml
 

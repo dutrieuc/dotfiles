@@ -1,0 +1,19 @@
+profile docked {
+    output eDP-1 position 3840,2080 scale 1.4
+    output DP-6 position 1920,2080
+    output DP-7 position 840,1580 transform 90
+}
+
+profile bare_hdmi {
+    output HDMI-A-1 position 3840,640
+    output eDP-1 position 3840,2080
+}
+
+profile bare_t4 {
+    output DP-6 position 3840,0
+    output eDP-1 position 3840,2080
+}
+
+profile {
+    output eDP-1 position 3840,2080
+}

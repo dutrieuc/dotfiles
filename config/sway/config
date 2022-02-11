@@ -11,6 +11,7 @@ include $HOME/.config/sway/template
 #theme variables
 
 # user variables
+include /etc/sway/definitions
 include $HOME/.config/sway/definitions.d/user_definition.conf
 
 include /etc/sway/inputs/*
@@ -20,14 +21,6 @@ input * {
 #    xkb_options "caps:swapescape"
 }
 include /etc/sway/outputs/*
-# laptop screen
-output eDP-1 pos 3840 2080
-output DP-6 pos 1920 2080
-output DP-7 pos 0 2080
-# bare thunderbolt, atop
-# output DP-6 pos 3840 0
-# bare hdmi, left
-output HDMI-A-1 pos 3840 640
 
 # enable modes
 include ~/.config/sway/modes/*
