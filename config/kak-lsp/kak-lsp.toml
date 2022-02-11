@@ -134,13 +134,13 @@ args = ["--stdio"]
 
 [language.javascript]
 filetypes = ["javascript"]
-roots = [".flowconfig"]
-command = "flow"
-args = ["lsp"]
+roots = ["package.json"]
+command = "typescript-language-server"
+args = ["--stdio"]
 
 [language.json]
 filetypes = ["json"]
-roots = ["package.json"]
+roots = ["package.json", "tsconfig.json"]
 command = "json-languageserver"
 args = ["--stdio"]
 
@@ -221,10 +221,8 @@ roots = ["requirements.txt", "setup.py", ".git", ".hg"]
 command = "pylsp"
 offset_encoding = "utf-8"
 [language.python.settings]
-"pylsp.configurationSources" = ["python-lsp-black","pyflakes","mccabe","pycodestyle","rope"]
+"pylsp.configurationSources" = ["python-lsp-black","pyflakes","pycodestyle","rope"]
 # "pylsp.configurationSources" = ["python-lsp-black","pyflakes","mccabe","pycodestyle","rope"]
-# See https://github.com/palantir/python-language-server#configuration
-# and https://github.com/palantir/python-language-server/blob/develop/vscode-client/package.json
 
 [language.reason]
 filetypes = ["reason"]
@@ -312,19 +310,8 @@ command = "zls"
 [language.xml]
 filetypes = ["xml"]
 roots = [".git", "mvnw"]
-command = "java"
-args = [
-    # the vscode extension uses this, I don't know why, but it's not necessary
-    "-DwatchParentProcess=false",
-    # JVM options (not necessary) but the vscode extension uses them by default
-    "-noverify",  # bypass class verification
-    "-Xmx64M",  # set the maximum heap size
-        "-XX:+UseG1GC",  # use the G1 garbage collector
-        "-XX:+UseStringDeduplication",  # enable string deduplication optimisation
+command = "lemminx"
 
-    "-jar",
-    "/usr/share/java/lemminx/lemminx-0.18.2.jar"
-]
 # Semantic tokens support
 # See https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_semanticTokens
 # for the default list of tokens and modifiers.
