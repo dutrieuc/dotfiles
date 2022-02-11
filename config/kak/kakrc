@@ -1,16 +1,35 @@
-# Plugins
+# --- Plugins
 evaluate-commands %sh{
     kcr init kakoune
 }
 evaluate-commands %sh{
     kak-lsp --kakoune -s $kak_session
 }
+# Plug
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
-
+# Extra-filtetype, including git messages, support
 plug "kakoune-editor/kakoune-extra-filetypes"
-plug "https://gitlab.com/Screwtapello/kakoune-inc-dec"
-
+# Snippets
+plug "andreyorst/kakoune-snippet-collection"
+plug "occivink/kakoune-snippets" config %{
+    set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
+    set-option -add global snippets_directories "%opt{plug_install_dir}/odoo-kakoune-snippets/snippets"
+    set-option current snippets_auto_expand false
+}
+# Auto-pair
+plug "alexherbo2/auto-pairs.kak" %{
+    set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
+    enable-auto-pairs
+}
+# CSV
+plug "gspia/csv.kak" %{
+    set-option global csv_sep ','
+}
+# Alacritty
+plug "alexherbo2/alacritty.kak" %{
+    alacritty-integration-enable
+}
 
 # --- Options
 # Theme
@@ -23,81 +42,89 @@ plug "andreyorst/powerline.kak" defer powerline_dracula %{
     powerline-start
 }
 
-set-option global grepcmd 'rg -Hn --no-heading'
-set-option global makecmd 'update_odoodb'
-
-# Eslint JS
-plug "schemar/kak-jsts" config %{
-    hook global WinSetOption filetype=(javascript|typescript) %{
-        alias window jsformat format-eslint
-    }
-}
-
-# CSV
-plug "gspia/csv.kak" %{
-    set-option global csv_sep ','
-}
-
 # plug "alexherbo2/show-characters.kak" %{
 #     show-characters
 # }
 
-# Clippy
-set global ui_options terminal_assistant=none
+set-option global grepcmd 'rg -Hn --no-heading'
+set-option global ui_options terminal_assistant=none
 
-hook global WinSetOption filetype=(plain|text|markdown|rst|ms|org) %{
+# LSP
+lsp-enable
+lsp-auto-hover-enable
+set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(){}\[\]]\z<ret>'"
+set-option global tabstop 4
+set-option global indentwidth 4
+set-option global lsp_hover_anchor true
+set-option global lsp_show_hover_format %{
+    if [ -n "${lsp_diagnostics}" ]; then
+        printf "{+b@InfoDefault}Diagnostics:{InfoDefault}\n%s" "${lsp_diagnostics}"
+    fi
+}
+
+# Autoreload buffer on modification 
+set-option global autoreload yes
+
+# --- Hooks
+# hook global InsertChar \t %{ exec -draft -itersel h@ }
+hook global RegisterModified '"' %{ nop %sh{
+  printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
+}}
+# Autowrap for text
+hook global WinSetOption filetype=(plain|text|markdown|rst|ms|org|git-commit) %{
     set window autowrap_column 72
     autowrap-enable
     map buffer normal = "|fmt -w $kak_opt_autowrap_column<ret>"
 }
 
-# LSP
-lsp-enable
-set global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(){}\[\]]\z<ret>'"
-lsp-auto-hover-enable
-set-option global lsp_hover_anchor true
-
-
-hook global InsertChar \t %{ exec -draft -itersel h@ }
-set global tabstop 4
-set global indentwidth 4
-
-# Auto-pair
-plug "alexherbo2/auto-pairs.kak" %{
-    set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
-    enable-auto-pairs
-}
-
-set-option global autoreload yes
 # --- Commands
  
-# fzf
-
+# FZF
 define-command -override fzf-files %{
   connect terminal-popup sh -c %{
     fzf --preview 'cat {}' | xargs kcr edit --
   }
 }
-
 define-command -override fzf-buffers %{
   connect terminal-popup sh -c %{
     kcr get --raw --value buflist | fzf --preview 'kcr cat --raw {}' | xargs kcr send buffer --
   }
 }
 
-# Windowing
-plug "alexherbo2/alacritty.kak" %{
-    alacritty-integration-enable
+# Odoo
+define-command oscout-popup %{
+  connect terminal-panel sh -c %{
+    cd ~/source-odoo/;
+    oscout
+  }
+}
+define-command odoo-update-popup %{
+  connect terminal-panel sh -c %{
+    update_odoodb
+    read a
+  }
+}
+
+# Surround
+define-command -override my-surround -docstring %{
+	Surround all selections with the typed character. 
+} %{
+	on-key %{
+		evaluate-commands %sh{
+			left=$kak_key
+			right=$kak_key
+			pair() {
+				( [ "$kak_key" = "$1" ] || [ "$kak_key" = "$2" ] ) && left=$1 && right=$2
+			}
+			pair '(' ')' || pair '[' ']' || pair '{' '}' || pair '<lt>' '<gt>'
+			printf "execute-keys %%{i%s<esc>a%s<esc>}" "$left" "$right"
+		}
+	}
 }
 
 # --- Mapping 
 
 # - Normal mode 
-
-# Reloading
-map -docstring 'reload kakrc' global normal <F5> ':source-kakrc; echo reloaded kakrc<ret>'
-
-
 map -docstring 'client' global normal <c-t> ':new<ret>'
 map -docstring 'terminal' global normal <c-n> ':connect-terminal<ret>'
 # map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'
@@ -106,14 +133,11 @@ map -docstring 'buffer picker' global normal <c-b> ':connect terminal-popup kcr 
 map -docstring 'grep picker' global normal <c-g> ':connect terminal-popup kcr fzf grep<ret>'
 map -docstring 'grep picker (buffer)' global normal <c-r> ':connect terminal-popup kcr fzf grep %val{buflist}<ret>'
 map -docstring 'git' global normal <c-l> ':connect terminal-popup lazygit &<ret>'
-# - User mode 
 
-# i3
-plug 'delapouite/kakoune-i3' %{
-      # Suggested mapping
-  map global user 3 ': enter-user-mode i3<ret>' -docstring 'i3 mode'
+plug "https://gitlab.com/Screwtapello/kakoune-inc-dec" %{
+    map global normal <c-a> ':inc-dec-modify-numbers + 1<ret>'
+    map global normal <c-x> ':inc-dec-modify-numbers - 1<ret>'
 }
-
 
 plug 'delapouite/kakoune-buffers' %{
     map global normal ^ q
@@ -126,24 +150,17 @@ plug 'delapouite/kakoune-buffers' %{
     map global normal B ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
 }
 
-
-# System clipboard
-# 
-# ,p paste from sys clipboard
+# - User mode 
+map global user l %{: enter-user-mode lsp<ret>} -docstring "LSP mode"
+map global user s ': snippets ' -docstring 'snippet menu'
+map global user e ': snippets-expand-trigger<ret>' -docstring 'snippet expand'
+map global user u %{: my-surround<ret>} -docstring 'surround'
+map global user o ': enter-user-mode odoo<ret>' -docstring 'enter odoo mode'
 map global user P '!wl-paste --no-newline<ret>' -docstring 'paste'
 map global user p '<a-!>wl-paste --no-newline<ret>' -docstring 'paste before'
 
-hook global RegisterModified '"' %{ nop %sh{
-  printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
-}}
-
+# - Odoo mode
 declare-user-mode odoo
-map global user o ': enter-user-mode odoo<ret>' -docstring 'enter odoo mode'
-define-command oscout-popup %{
-  connect terminal-popup sh -c %{
-    cd ~/source-odoo/;
-    oscout
-  }
-}
 map global odoo o ': oscout-popup<ret>' -docstring 'search'
-map global odoo m ': make<ret>' -docstring 'make'
+map global odoo m ': odoo-update-popup<ret>' -docstring 'make'
+map global odoo s ': snippets odoo_' -docstring 'snippet odoo menu'
