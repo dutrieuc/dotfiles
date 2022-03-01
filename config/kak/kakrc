@@ -34,13 +34,6 @@ plug "alexherbo2/alacritty.kak" %{
 # --- Options
 # Theme
 colorscheme dracula
-plug "andreyorst/powerline.kak" defer powerline_dracula %{
-    powerline-separator global none
-    powerline-theme dracula
-    powerline-format global 'lsp git bufname line_column mode_info client session position'
-} config %{
-    powerline-start
-}
 
 # plug "alexherbo2/show-characters.kak" %{
 #     show-characters
@@ -56,6 +49,7 @@ set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(
 set-option global tabstop 4
 set-option global indentwidth 4
 set-option global lsp_hover_anchor true
+set-option global lsp_auto_show_code_actions true
 set-option global lsp_show_hover_format %{
     if [ -n "${lsp_diagnostics}" ]; then
         printf "{+b@InfoDefault}Diagnostics:{InfoDefault}\n%s" "${lsp_diagnostics}"
@@ -66,7 +60,7 @@ set-option global lsp_show_hover_format %{
 set-option global autoreload yes
 
 # --- Hooks
-# hook global InsertChar \t %{ exec -draft -itersel h@ }
+hook global InsertChar \t %{ exec -draft -itersel h@ }
 hook global RegisterModified '"' %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
 }}
