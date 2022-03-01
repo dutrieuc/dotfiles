@@ -1,0 +1,7 @@
+#!/bin/sh
+
+odev kill test-db
+odev remove -y test-db
+odev create test-db
+odev init test-db $1
+odev run test-db . -i $2
