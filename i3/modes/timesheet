@@ -1,10 +1,11 @@
 set $mode_timesheet "\
 <span foreground='$base0A'></span>  \
 <span foreground='$base05'> \
-<span foreground='$base0A'>(<b>r</b>)</span>resume \
-<span foreground='$base0A'>(<b>s</b>)</span>stop \
-<span foreground='$base0A'>(<b>u</b>)</span>upload \
-<span foreground='$base0A'>(<b>w</b>)</span>webapp \
+<span foreground='$base0A'>(<b>r</b>)</span>esume \
+<span foreground='$base0A'>(<b>s</b>)</span>top \
+<span foreground='$base0A'>(<b>u</b>)</span>pload \
+<span foreground='$base0A'>(<b>m</b>)</span>onthly report \
+<span foreground='$base0A'>(<b>w</b>)</span>ebapp \
 </span>"
 
 mode --pango_markup $mode_timesheet {
@@ -12,6 +13,7 @@ mode --pango_markup $mode_timesheet {
         $bindsym r exec toggl continue; mode "default"
         $bindsym w exec toggl www; mode "default"
         $bindsym u exec $terminal -e "toggl-upload"; mode "default"
+        $bindsym m exec $terminal -e "toggl-report"; mode "default"
 
         # Return to default mode.
         $bindsym Escape mode "default"
