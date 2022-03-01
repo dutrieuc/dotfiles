@@ -20,8 +20,8 @@ input * {
     xkb_options "grp:ctrls_toggle,compose:ralt"
 #    xkb_options "caps:swapescape"
 }
-include /etc/sway/outputs/*
 
+include ~/.config/sway/outputs/*
 # enable modes
 include ~/.config/sway/modes/*
 #include /etc//sway/modes/*

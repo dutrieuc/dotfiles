@@ -45,6 +45,10 @@
         path: i3/definition.conf
     ~/.config/sway/template:
         path: i3/template
+    ~/.config/sway/outputs/:
+        path: i3/outputs/*
+        create: true
+        glob: true
     ~/.config/sway/modes/:
         path: i3/modes/*
         create: true

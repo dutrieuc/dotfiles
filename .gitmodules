@@ -26,3 +26,6 @@
 [submodule "themes/base16-waybar"]
 	path = themes/base16-waybar
 	url = https://github.com/mnussbaum/base16-waybar.git
+[submodule "themes/dracula-wallpapers"]
+	path = themes/dracula-wallpapers
+	url = https://github.com/helpotters/dracula-wallpapers.git
