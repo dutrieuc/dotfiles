@@ -1,5 +1,4 @@
 #!/bin/sh
 task=$(toggl ls -f description | awk '!x[$0]++' | fzf --header-lines=1 --print-query --no-sort | tail -1 | xargs)
-task_number=$(echo $task | grep -E -o '(^\[[[:digit:]]*\])|(^[[:alpha:]]*)')
-[[ ! -z "$task" ]] && swaymsg 'exec toggl continue "'$task_number'"'
+[[ ! -z "$task" ]] && swaymsg 'exec toggl continue "'$task'"'
 
