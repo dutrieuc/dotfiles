@@ -67,6 +67,10 @@
 
     ~/.config/rofi/config.rasi:
         path: themes/rofi/theme/config1.rasi
+    ~/.config/wallpapers/:
+        path: themes/wallpapers/wallpapers-gen/*
+        create: true
+        glob: true
 
     ~/.config/spotifyd/spotifyd.conf:
         path: config/spotifyd/spotifyd.conf
