@@ -33,7 +33,7 @@ plug "alexherbo2/alacritty.kak" %{
 
 # --- Options
 # Theme
-colorscheme dracula
+colorscheme dracula-transparent
 
 # plug "alexherbo2/show-characters.kak" %{
 #     show-characters
