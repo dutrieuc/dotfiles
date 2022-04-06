@@ -1,3 +1,4 @@
+swaymsg "workspace 2; layout stacking"
 swaymsg "workspace 1; layout stacking"
 sleep 3.5s
 swaymsg "

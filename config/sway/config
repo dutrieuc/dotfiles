@@ -21,7 +21,7 @@ input * {
 #    xkb_options "caps:swapescape"
 }
 
-include ~/.config/sway/outputs/*
+# include ~/.config/sway/outputs/*
 # enable modes
 include ~/.config/sway/modes/*
 #include /etc//sway/modes/*

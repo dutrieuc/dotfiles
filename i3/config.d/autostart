@@ -1,8 +1,8 @@
 # Autostart applications
-exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pamac-tray
-exec --no-startup-id aw-qt
-exec_always pkill kanshi; exec kanshi
+# exec --no-startup-id aw-qt
+# exec_always pkill kanshi; exec kanshi
 exec eval $(gnome-keyring-daemon --start)
 exec i3-focus-last server
 
