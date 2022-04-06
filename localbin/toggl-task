@@ -1,4 +1,6 @@
 #!/bin/sh
-task=$(toggl ls -f description | awk '!x[$0]++' | fzf --header-lines=1 --print-query --no-sort | tail -1 | xargs)
-[[ ! -z "$task" ]] && swaymsg 'exec toggl continue "'$task'"'
+datetime=$(date -d "now - 2 months" +%Y-%m-%d)
+task=$(toggl ls -s $datetime -f id,description | uniq -f 1 | fzf --header-lines=1 --print-query --no-sort | tail -1 | xargs)
+id=$(echo $task | cut -d' ' -f1)
+[[ ! -z "$task" ]] && swaymsg 'exec toggle-continue.py "$id"'
 
