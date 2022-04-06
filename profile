@@ -5,4 +5,4 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export BROWSER=/usr/bin/firefox
 export TERMINAL=alacritty
 
-export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=down:60%'
+export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=up:60%'
