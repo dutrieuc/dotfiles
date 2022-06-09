@@ -20,6 +20,8 @@ input * {
     xkb_options "grp:ctrls_toggle,compose:ralt"
 #    xkb_options "caps:swapescape"
 }
+input 1133:4119:Logitech_Anywhere_MX left_handed enabled
+
 
 # include ~/.config/sway/outputs/*
 # enable modes
