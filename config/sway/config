@@ -15,15 +15,15 @@ include /etc/sway/definitions
 include $HOME/.config/sway/definitions.d/user_definition.conf
 
 include /etc/sway/inputs/*
-input * {
-    xkb_layout us,fr
-    xkb_options "grp:ctrls_toggle,compose:ralt"
-#    xkb_options "caps:swapescape"
-}
+input type:keyboard xkb_layout us,fr
+input type:keyboard xkb_options "grp:ctrls_toggle,compose:ralt"
 input 1133:4119:Logitech_Anywhere_MX left_handed enabled
 
 
 # include ~/.config/sway/outputs/*
+bindswitch --locked lid:on output eDP-1 disable
+bindswitch --locked lid:off output eDP-1 enable
+
 # enable modes
 include ~/.config/sway/modes/*
 #include /etc//sway/modes/*

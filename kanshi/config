@@ -1,13 +1,12 @@
-
 profile docked {
-    output eDP-1 position 3840,2400 scale 1.4
-    output "Goldstar Company Ltd 27EA63 " position 1920,2080
-    output "Goldstar Company Ltd 24M45 SerialNumber" position 840,1580 transform 270
-    exec swaymsg "output 'Goldstar Company Ltd 24M45 SerialNumber' bg ~/Pictures/wallpapers/wallpapers-gen/cliff-left.png  fill"
-    exec swaymsg "output 'Goldstar Company Ltd 27EA63 ' bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill"
+    output eDP-1 enable position 1920,320 scale 1.25
     exec swaymsg output eDP-1 bg ~/Pictures/wallpapers/wallpapers-gen/cliff-right.png  fill
+    output "Goldstar Company Ltd 27EA63 " position 0,0
+    exec swaymsg "output 'Goldstar Company Ltd 27EA63 ' bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill"
     exec swaymsg workspace 2 output 'Goldstar Company Ltd 27EA63 '
-    exec swaymsg workspace 3 output 'Goldstar Company Ltd 24M45 SerialNumber'
+    # output "Goldstar Company Ltd 24M45 SerialNumber" position 840,1580 transform 270
+    # exec swaymsg "output 'Goldstar Company Ltd 24M45 SerialNumber' bg ~/Pictures/wallpapers/wallpapers-gen/cliff-left.png  fill"
+    # exec swaymsg workspace 3 output 'Goldstar Company Ltd 24M45 SerialNumber'
 }
 
 profile bare_hdmi {

@@ -61,6 +61,8 @@
         path: i3/workspace-3.json
     ~/.config/kanshi/config:
         path: kanshi/config
+    ~/.config/mako/config:
+        path: config/mako/config
 
     /etc/interception/udevmon.yaml:
         path: systemd/caps2esc/udevmon.yaml
