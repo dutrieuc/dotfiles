@@ -11,17 +11,17 @@ plug "andreyorst/plug.kak" noload
 # Extra-filtetype, including git messages, support
 plug "kakoune-editor/kakoune-extra-filetypes"
 # Snippets
-plug "andreyorst/kakoune-snippet-collection"
-plug "occivink/kakoune-snippets" config %{
-    set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
-    set-option -add global snippets_directories "%opt{plug_install_dir}/odoo-kakoune-snippets/snippets"
-    set-option current snippets_auto_expand false
-}
+#plug "andreyorst/kakoune-snippet-collection"
+#plug "occivink/kakoune-snippets" config %{
+#    set-option -add global snippets_directories "%opt{plug_install_dir}/kakoune-snippet-collection/snippets"
+#    set-option -add global snippets_directories "%opt{plug_install_dir}/odoo-kakoune-snippets/snippets"
+#    set-option current snippets_auto_expand false
+#}
 # Auto-pair
-plug "alexherbo2/auto-pairs.kak" %{
-    set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
-    enable-auto-pairs
-}
+#plug "alexherbo2/auto-pairs.kak" %{
+#    set-option global auto_pairs ( ) { } [ ] '"' '"' "'" "'" ` ` “ ” ‘ ’ « » ‹ ›
+#    enable-auto-pairs
+#}
 # CSV
 plug "gspia/csv.kak" %{
     set-option global csv_sep ','
@@ -44,23 +44,27 @@ set-option global ui_options terminal_assistant=none
 
 # LSP
 lsp-enable
-lsp-auto-hover-enable
-set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(){}\[\]]\z<ret>'"
+#lsp-auto-hover-enable
+#set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(){}\[\]]\z<ret>'"
 set-option global tabstop 4
 set-option global indentwidth 4
 set-option global lsp_hover_anchor true
 set-option global lsp_auto_show_code_actions true
-set-option global lsp_show_hover_format %{
-    if [ -n "${lsp_diagnostics}" ]; then
-        printf "{+b@InfoDefault}Diagnostics:{InfoDefault}\n%s" "${lsp_diagnostics}"
-    fi
-}
+# set-option global lsp_show_hover_format %{
+#     if [ -n "${lsp_diagnostics}" ]; then
+#         printf "{+b@InfoDefault}Diagnostics:{InfoDefault}\n%s" "${lsp_diagnostics}"
+#     fi
+# }
 
 # Autoreload buffer on modification 
 set-option global autoreload yes
 
 # --- Hooks
-hook global InsertChar \t %{ exec -draft -itersel h@ }
+# python tab to space
+hook global WinSetOption filetype=python %{
+    hook buffer InsertChar \t %{ exec -draft -itersel h@ }
+}
+# copy to system clipboard
 hook global RegisterModified '"' %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
 }}
