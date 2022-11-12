@@ -4,4 +4,5 @@ sleep 3.5s
 swaymsg "
     exec thunderbird;
     exec firefox
+    exec nextcloud --background;
 ";
