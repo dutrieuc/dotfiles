@@ -61,6 +61,10 @@
 
     ~/.config/spotifyd/spotifyd.conf:
         path: config/spotifyd/spotifyd.conf
+
+    ~/.zk/config.toml:
+        path: zk/config.toml
+
 - create:
     - ~/.local/bin/
     - ~/.config/kak/plugins/

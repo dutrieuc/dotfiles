@@ -312,6 +312,12 @@ filetypes = ["xml"]
 roots = [".git", "mvnw"]
 command = "lemminx"
 
+[language.markdown]
+filetypes = ["markdown"]
+roots = [".zk"]
+command = "zk"
+args = ["lsp", "--log", "/tmp/zk-lsp.log"]
+
 # Semantic tokens support
 # See https://microsoft.github.io/language-server-protocol/specifications/specification-current/#textDocument_semanticTokens
 # for the default list of tokens and modifiers.
