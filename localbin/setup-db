@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "setup-db db_name 15.0 base"
+odev kill $1
+odev remove -y $1
+odev create $1
+odev init $1 $2
+odev run $1 . -i $3
