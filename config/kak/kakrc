@@ -46,8 +46,6 @@ set-option global ui_options terminal_assistant=none
 lsp-enable
 #lsp-auto-hover-enable
 #set-option global lsp_completion_trigger "execute-keys 'h<a-h><a-k>\S[^\h\n,=;*(){}\[\]]\z<ret>'"
-set-option global tabstop 4
-set-option global indentwidth 4
 set-option global lsp_hover_anchor true
 set-option global lsp_auto_show_code_actions true
 # set-option global lsp_show_hover_format %{
@@ -61,7 +59,9 @@ set-option global autoreload yes
 
 # --- Hooks
 # python tab to space
-hook global WinSetOption filetype=python %{
+hook global WinSetOption filetype=(rust|python|zig|ruby) %{
+	set-option buffer indentwidth 4
+    set-option buffer tabstop 4
     hook buffer InsertChar \t %{ exec -draft -itersel h@ }
 }
 # copy to system clipboard
@@ -101,6 +101,15 @@ define-command odoo-update-popup %{
     update_odoodb
     read a
   }
+}
+
+# Note
+define-command zk-edit %{
+  connect terminal sh -c %{
+  }
+}
+define-command zk-edit-tag -params 1 %{
+  connect terminal zk edit --interactive --tag %arg{1}
 }
 
 # Surround
@@ -154,6 +163,9 @@ map global user s ': snippets ' -docstring 'snippet menu'
 map global user e ': snippets-expand-trigger<ret>' -docstring 'snippet expand'
 map global user u %{: my-surround<ret>} -docstring 'surround'
 map global user o ': enter-user-mode odoo<ret>' -docstring 'enter odoo mode'
+map global user n ': enter-user-mode note<ret>' -docstring 'enter note mode'
+
+# System clipboard
 map global user P '!wl-paste --no-newline<ret>' -docstring 'paste'
 map global user p '<a-!>wl-paste --no-newline<ret>' -docstring 'paste before'
 
@@ -162,3 +174,12 @@ declare-user-mode odoo
 map global odoo o ': oscout-popup<ret>' -docstring 'search'
 map global odoo m ': odoo-update-popup<ret>' -docstring 'make'
 map global odoo s ': snippets odoo_' -docstring 'snippet odoo menu'
+
+# - ZK note mode
+declare-user-mode note
+map global note e ': zk edit --interactive<ret>' -docstring 'edit or create a note'
+map global note t ': zk-edit-tag ' -docstring 'list/edit note with {tag}'
+map global note T ': zk-edit-tag todo<ret>' -docstring 'list/edit note with #todo'
+map global note d ': zk-cycle-todo<ret>' -docstring 'todo cycle todo/doing/done'
+map global note b ': zk-backlinks<ret>' -docstring 'todo list/edit backlinks to this note (lsp find reference)'
+map global note i ': zk-index<ret>' -docstring 'todo index this notebook'
