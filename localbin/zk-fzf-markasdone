@@ -1,0 +1,7 @@
+FZF_DEFAULT_COMMAND="rg --column --line-number --no-heading --color=always --sortr=created -F '#todo' "
+eval "$FZF_DEFAULT_COMMAND" | fzf --ansi --disabled --delimiter ':' \
+	--prompt="mark-as-done> " \
+    --preview 'preview {1} {2}' \
+    --preview-window up,50%,border-horizontal  \
+    --bind "enter:execute(sed -i '{2}s/todo/done/' {1})+reload($FZF_DEFAULT_COMMAND)"
+
