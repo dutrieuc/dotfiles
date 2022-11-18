@@ -27,9 +27,7 @@ plug "gspia/csv.kak" %{
     set-option global csv_sep ','
 }
 # Alacritty
-plug "alexherbo2/alacritty.kak" %{
-    alacritty-integration-enable
-}
+plug "alexherbo2/alacritty.kak"
 
 # --- Options
 # Theme
@@ -57,11 +55,12 @@ set-option global lsp_auto_show_code_actions true
 # Autoreload buffer on modification 
 set-option global autoreload yes
 
+set-option global indentwidth 0
+set-option global tabstop 4
 # --- Hooks
 # python tab to space
 hook global WinSetOption filetype=(rust|python|zig|ruby) %{
-	set-option buffer indentwidth 4
-    set-option buffer tabstop 4
+    set-option buffer indentwidth 4
     hook buffer InsertChar \t %{ exec -draft -itersel h@ }
 }
 # copy to system clipboard
@@ -104,12 +103,27 @@ define-command odoo-update-popup %{
 }
 
 # Note
-define-command zk-edit %{
-  connect terminal sh -c %{
-  }
-}
 define-command zk-edit-tag -params 1 %{
   connect terminal zk edit --interactive --tag %arg{1}
+}
+define-command zk-md-link %{
+	my-surround
+	execute-keys '[a()<esc>h,p'
+}
+define-command zk-cycle-todo %{
+    try %{
+        execute-keys 'xs #todo <ret>'
+        execute-keys 'c #done <esc>'
+    } catch %{
+        execute-keys 's #done <ret>'
+        execute-keys 'c #todo <esc>'
+    }
+}
+define-command zk-xdg-open %{
+	execute-keys '<a-i>('
+	nop %sh{
+		xdg-open $kak_main_reg_dot
+	}
 }
 
 # Surround
@@ -177,9 +191,12 @@ map global odoo s ': snippets odoo_' -docstring 'snippet odoo menu'
 
 # - ZK note mode
 declare-user-mode note
-map global note e ': zk edit --interactive<ret>' -docstring 'edit or create a note'
+map global note j ': connect terminal zk daily<ret>' -docstring 'open today journal'
+map global note e ': connect terminal zk edit --interactive<ret>' -docstring 'edit or create a note'
 map global note t ': zk-edit-tag ' -docstring 'list/edit note with {tag}'
 map global note T ': zk-edit-tag todo<ret>' -docstring 'list/edit note with #todo'
-map global note d ': zk-cycle-todo<ret>' -docstring 'todo cycle todo/doing/done'
+map global note l ': zk-md-link<ret>' -docstring 'insert md link around selection from sys clipboard'
+map global note d ': zk-cycle-todo<ret>' -docstring 'cycle todo/done'
+map global note o ': zk-xdg-open<ret>' -docstring 'open link with xdg'
 map global note b ': zk-backlinks<ret>' -docstring 'todo list/edit backlinks to this note (lsp find reference)'
 map global note i ': zk-index<ret>' -docstring 'todo index this notebook'
