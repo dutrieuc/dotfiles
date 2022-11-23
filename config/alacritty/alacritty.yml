@@ -104,8 +104,8 @@ window:
 
 # Font configuration
 font:
-  normal:
-    family: "MesloLGS NF"
+  size: 12.0
+
 #font:
   # Normal (roman) font face
   #normal:
