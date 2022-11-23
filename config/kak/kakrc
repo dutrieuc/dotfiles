@@ -59,9 +59,12 @@ set-option global indentwidth 0
 set-option global tabstop 4
 # --- Hooks
 # python tab to space
-hook global WinSetOption filetype=(rust|python|zig|ruby) %{
+hook global WinSetOption filetype=(rust|python|zig|ruby|xml|js) %{
     set-option buffer indentwidth 4
     hook buffer InsertChar \t %{ exec -draft -itersel h@ }
+}
+hook global WinSetOption filetype=python %{
+    set-option window formatcmd 'black -l 120 -q  -'
 }
 # copy to system clipboard
 hook global RegisterModified '"' %{ nop %sh{
