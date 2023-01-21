@@ -23,3 +23,10 @@ profile {
     output eDP-1 position 3840,2080
     exec swaymsg output eDP-1 bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill
 }
+
+profile desktop {
+	output DP-3 enable position 0,0
+	output HDMI-A-1 disable
+}
+
+

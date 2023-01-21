@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run steam-dmenu
+# https://github.com/junglerobba/steam-dmenu.git
+python ~/tools/steam-dmenu/steam_dmenu.py -d 'rofi -dmenu -i' -l '~/.local/share/Steam'
