@@ -219,7 +219,7 @@ intelephense.storagePath = "/tmp/intelephense"
 filetypes = ["python"]
 roots = ["requirements.txt", "setup.py", ".git", ".hg"]
 command = "pylsp"
-offset_encoding = "utf-8"
+settings_section = "_"
 [language.python.settings]
 "pylsp.configurationSources" = ["python-lsp-black","pyflakes","pycodestyle","rope"]
 # "pylsp.configurationSources" = ["python-lsp-black","pyflakes","mccabe","pycodestyle","rope"]
