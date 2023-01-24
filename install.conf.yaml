@@ -23,6 +23,8 @@
         path: config/fontconfig/fonts.conf
     ~/.config/alacritty/alacritty.yml:
         path: config/alacritty/alacritty.yml
+    ~/.config/foot/foot.ini:
+        path: config/foot/foot.ini
     ~/.config/broot/conf.hjson:
         path: config/broot/conf.hjson
     ~/.config/kak-lsp/kak-lsp.toml:
@@ -71,10 +73,6 @@
 
     ~/.config/rofi/config.rasi:
         path: themes/rofi/theme/config1.rasi
-    ~/.config/wallpapers/:
-        path: themes/wallpapers/wallpapers-gen/*
-        create: true
-        glob: true
 
     ~/.config/spotifyd/spotifyd.conf:
         path: config/spotifyd/spotifyd.conf
