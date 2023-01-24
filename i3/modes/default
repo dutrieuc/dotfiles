@@ -1,144 +1,102 @@
-# i3 config file (v4)
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+### Key bindings
+#
+# Basics:
+#
+## Launch // Terminal ##
+bindsym $mod+Return exec $term_cwd
 
-
-
-# set default desktop layout (default is tiling)
-# workspace_layout tabbed <stacking|tabbed>
-
-
-# change borders
-bindsym $mod+u border none
-bindsym $mod+y border pixel 1
-bindsym $mod+n border normal
-
-# start a terminal
-bindsym $mod+Return exec $terminal
-
-# kill focused window
+## Action // Kill focused window ##
 bindsym $mod+Shift+q kill
 
-# start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+## Launch // Open launcher ##
+bindsym $mod+d exec $menu
 bindsym $mod+space exec rofi -show run
 
-# windows by name
-bindsym $mod+Ctrl+space exec i3-focus-last menu
-
-# launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
-
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
-#exec --no-startup-id volumeicon
-#bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
-exec --no-startup-id start-pulseaudio-x11
-exec --no-startup-id pa-applet
-bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
-
-bindsym $mod+x exec ~/.i3/sound-profile.sh
-
-# Screen brightness controls
-# bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
-# bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +2%
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -2%
-bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym XF86MonBrightnessUp exec brightnessctl set +5%
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym $mod+F4 exec $terminal --class popup -e "spt"
-
-# Start Applications
-bindsym $mod+Ctrl+b exec $terminal -e 'bmenu'
 bindsym $mod+Shift+Return exec firefox
-bindsym $mod+F3 exec pcmanfm
-# bindsym $mod+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F5 exec $terminal -e 'mocp'
-bindsym $mod+t exec --no-startup-id pkill picom
-bindsym $mod+Ctrl+t exec --no-startup-id picom -b
-bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart dunst'"
-bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+## Launch // Open clipboard ##
+bindsym $mod+Shift+p exec $clipboard
+
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
+
+## Action // Reload Sway Configuration ##
+bindsym $mod+Shift+c reload
+
+
+# --locked flags allow the buttons to be used whilst the screen is locked.
+bindsym --locked XF86AudioRaiseVolume exec $volume_up
+
+bindsym --locked XF86AudioLowerVolume exec $volume_down
+
+bindsym --locked XF86AudioMute exec $volume_mute
+
+bindsym XF86AudioMicMute exec $mic_mute
+
+bindsym --locked XF86MonBrightnessUp exec $brightness_up
+
+bindsym --locked XF86MonBrightnessDown exec $brightness_down
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+
+bindsym XF86AudioNext exec playerctl next
+
+bindsym XF86AudioPrev exec playerctl previous
+
 bindsym $mod+c exec $terminal --class popup -e "toggl-task"
+
+bindsym XF86Search exec $menu
+
+bindsym XF86PowerOff exec $shutdown
+
+bindsym XF86TouchpadToggle input type:touchpad events toggle enabled disabled
 
 focus_follows_mouse no
 
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
 
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# Moving around:
+#
+# Move your focus around
+## Navigation // Move focus // $mod + ↑ ↓ ← → ##
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+#bindsym $mod+$left_alt focus left
+#bindsym $mod+$down_alt focus down
+#bindsym $mod+$up_alt focus up
+#bindsym $mod+$right_alt focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+## Navigation // Move focused window // $mod + Shift + ↑ ↓ ← → ##
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
-# workspace back and forth (with/without active container)
-workspace_auto_back_and_forth yes
-bindsym $mod+b workspace back_and_forth
-bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
+#bindsym $mod+Shift+$left_alt move left
+#bindsym $mod+Shift+$down_alt move down
+#bindsym $mod+Shift+$up_alt move up
+#bindsym $mod+Shift+$right_alt move right
 
-# split orientation
-bindsym $mod+i split h;exec notify-send 'tile horizontally'
-bindsym $mod+o split v;exec notify-send 'tile vertically'
-bindsym $mod+q split toggle
+## Navigation // List all open windows in last-recently-used order ##
+bindsym $mod+p exec env RUST_BACKTRACE=1 swayr switch-window &>> /tmp/swayr.log
 
-# toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+## Navigation // Switch to the last recently used window ##
+bindsym Mod1+Tab exec env RUST_BACKTRACE=1 swayr switch-to-urgent-or-lru-window &>> /tmp/swayr.log
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+## Navigation // Switch to the last recently used workspace ##
+bindsym $mod+Tab workspace back_and_forth
 
-# toggle tiling / floating
-bindsym $mod+Shift+p floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+p focus mode_toggle
-
-# toggle sticky
-bindsym $mod+Shift+s sticky toggle
-
-# focus the parent container
-bindsym $mod+a focus parent
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+minus scratchpad show
-
-#navigate workspaces next / previous
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
-
-
-# switch to workspace
+#
+# Workspaces:
+#
+## Navigation // Switch workspace // $mod + [number] ##
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -147,127 +105,72 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-
-# Move focused container to workspace
-bindsym $mod+Ctrl+1 move container to workspace $ws1
-bindsym $mod+Ctrl+2 move container to workspace $ws2
-bindsym $mod+Ctrl+3 move container to workspace $ws3
-bindsym $mod+Ctrl+4 move container to workspace $ws4
-bindsym $mod+Ctrl+5 move container to workspace $ws5
-bindsym $mod+Ctrl+6 move container to workspace $ws6
-bindsym $mod+Ctrl+7 move container to workspace $ws7
-bindsym $mod+Ctrl+8 move container to workspace $ws8
-
-# Move to workspace with focused container
-bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4; workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5; workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6; workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7; workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
-
-# Open specific applications in floating mode
-for_window [title="alsamixer"] floating enable border pixel 1
-for_window [class="calamares"] floating enable border normal
-for_window [class="Clipgrab"] floating enable
-for_window [title="File Transfer*"] floating enable
-for_window [class="fpakman"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
-for_window [class="GParted"] floating enable border normal
-for_window [title="i3_help"] floating enable sticky enable border normal
-for_window [class="Lightdm-settings"] floating enable
-for_window [class="Lxappearance"] floating enable sticky enable border normal
-for_window [class="Manjaro-hello"] floating enable
-for_window [class="Manjaro Settings Manager"] floating enable border normal
-for_window [title="MuseScore: Play Panel"] floating enable
-for_window [class="Nitrogen"] floating enable sticky enable border normal
-for_window [class="Oblogout"] fullscreen enable
-for_window [class="octopi"] floating enable
-for_window [title="About Pale Moon"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pavucontrol"] floating enable
-for_window [class="qt5ct"] floating enable sticky enable border normal
-for_window [class="Qtconfig-qt4"] floating enable sticky enable border normal
-for_window [class="Simple-scan"] floating enable border normal
-for_window [class="(?i)System-config-printer.py"] floating enable border normal
-for_window [class="Skype"] floating enable border normal
-for_window [class="Timeset-gui"] floating enable border normal
-for_window [class="(?i)virtualbox"] floating enable border normal
-for_window [class="Xfburn"] floating enable
-
-# switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
-
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 
-#############################
-### settings for i3-gaps: ###
-#############################
+## Action // Move focused window to workspace // $mod + Shift + [number] ##
+$bindsym $mod+Shift+1 move container to workspace $ws1, workspace $ws1
+$bindsym $mod+Shift+2 move container to workspace $ws2, workspace $ws2
+$bindsym $mod+Shift+3 move container to workspace $ws3, workspace $ws3
+$bindsym $mod+Shift+4 move container to workspace $ws4, workspace $ws4
+$bindsym $mod+Shift+5 move container to workspace $ws5, workspace $ws5
+$bindsym $mod+Shift+6 move container to workspace $ws6, workspace $ws6
+$bindsym $mod+Shift+7 move container to workspace $ws7, workspace $ws7
+$bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8
+$bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9
+$bindsym $mod+Shift+0 move container to workspace $ws10, workspace $ws10
 
-# Set inner/outer gaps
-gaps inner 14
-gaps outer -2
+## Launch // Open launcher in a new workspace ##
+bindsym $mod+Shift+d exec /usr/share/sway/scripts/first-empty-workspace.py --switch, exec $menu
 
-# Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
-# gaps inner|outer current|all set|plus|minus <px>
-# gaps inner all set 10
-# gaps outer all plus 5
+## Navigation // Switch to a new workspace ##
+bindsym $mod+n exec /usr/share/sway/scripts/first-empty-workspace.py --switch
 
-# Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+## Action // Move focused window to a new workspace ##
+bindsym $mod+Shift+n exec /usr/share/sway/scripts/first-empty-workspace.py --move
 
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
-# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-smart_borders on
+## Action // Move focused window to a new workspace and switch there ##
+bindsym $mod+Shift+m exec /usr/share/sway/scripts/first-empty-workspace.py --move --switch
 
-# Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
-set $mode_gaps Gaps: (o) outer, (i) inner
-set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-bindsym $mod+Shift+g mode "$mode_gaps"
+#
+# Layout stuff:
+#
+## Setting // Split windows horizontally ##
+bindsym $mod+b splith
+## Setting // Split windows vertically ##
+bindsym $mod+v splitv
 
-mode "$mode_gaps" {
-        bindsym o      mode "$mode_gaps_outer"
-        bindsym i      mode "$mode_gaps_inner"
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_inner" {
-        bindsym plus  gaps inner current plus 5
-        bindsym minus gaps inner current minus 5
-        bindsym 0     gaps inner current set 0
+## Action // Switch to window stacking ##
+bindsym $mod+s layout stacking
+## Action // Switch to window tabbing ##
+bindsym $mod+w layout tabbed
+## Action // Toggle window splitting ##
+bindsym $mod+e layout toggle split
 
-        bindsym Shift+plus  gaps inner all plus 5
-        bindsym Shift+minus gaps inner all minus 5
-        bindsym Shift+0     gaps inner all set 0
+## Action // Toggle fullscreen ##
+bindsym $mod+f fullscreen
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-mode "$mode_gaps_outer" {
-        bindsym plus  gaps outer current plus 5
-        bindsym minus gaps outer current minus 5
-        bindsym 0     gaps outer current set 0
+## Action // Toggle global fullscreen ##
+bindsym $mod+Shift+f fullscreen global
 
-        bindsym Shift+plus  gaps outer all plus 5
-        bindsym Shift+minus gaps outer all minus 5
-        bindsym Shift+0     gaps outer all set 0
+## Action // Toggle floating ##
+bindsym $mod+Shift+space floating toggle
 
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
+## Navigation // Toggle focus between tiling and floating ##
+# bindsym $mod+space focus mode_toggle
 
-bindsym $mod+Shift+u [urgent="latest"] focus
-for_window [class="popup"] floating enable
-for_window [instance="popup"] floating enable
+## Navigation // Swap focus to the parent window ##
+bindsym $mod+a focus parent
 
+## Launch // Toggle Help ##
+bindsym $mod+question exec $help
+
+## Launch // Open Support ##
+# bindsym $mod+Shift+s exec xdg-open https://github.com/Manjaro-Sway/manjaro-sway/blob/main/SUPPORT.md
+
+default_border pixel 1
+hide_edge_borders smart
+
+# allow to kill focused floating shell windows using Esc
+bindsym --release Escape [app_id="floating_shell" con_id=__focused__] kill
