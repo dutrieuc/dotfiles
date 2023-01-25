@@ -26,8 +26,8 @@ plug "kakoune-editor/kakoune-extra-filetypes"
 plug "gspia/csv.kak" %{
     set-option global csv_sep ','
 }
-# Alacritty
-plug "alexherbo2/alacritty.kak"
+# Foot
+plug "kkga/foot.kak"
 
 # --- Options
 # Theme

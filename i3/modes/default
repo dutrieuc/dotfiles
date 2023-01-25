@@ -47,7 +47,7 @@ bindsym XF86AudioNext exec playerctl next
 
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+c exec $terminal --class popup -e "toggl-task"
+bindsym $mod+c exec $term_float -e "toggl-task"
 
 bindsym XF86Search exec $menu
 
