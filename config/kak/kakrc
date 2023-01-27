@@ -66,6 +66,10 @@ hook global WinSetOption filetype=(rust|python|zig|ruby|xml|js) %{
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'black -l 120 -q  -'
 }
+hook global WinSetOption filetype=markdown %{
+    set window formatcmd 'prettier --parser markdown --print-width 72 --prose-wrap always'
+}
+
 # copy to system clipboard
 hook global RegisterModified '"' %{ nop %sh{
   printf %s "$kak_main_reg_dquote" | wl-copy > /dev/null 2>&1 &
