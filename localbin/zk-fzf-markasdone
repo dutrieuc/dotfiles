@@ -1,4 +1,4 @@
-FZF_DEFAULT_COMMAND="rg --column --line-number --no-heading --color=always --sortr=created -F '#todo' "
+FZF_DEFAULT_COMMAND="rg --column --line-number --no-heading --color=always --sort=created -F '#todo' "
 eval "$FZF_DEFAULT_COMMAND" | fzf --ansi --disabled --delimiter ':' \
 	--prompt="mark-as-done> " \
     --preview 'preview {1} {2}' \
