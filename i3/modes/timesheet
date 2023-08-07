@@ -12,8 +12,9 @@ mode --pango_markup $mode_timesheet {
         $bindsym s exec toggl stop; mode "default"
         $bindsym r exec toggl continue; mode "default"
         $bindsym w exec toggl www; mode "default"
-        $bindsym u exec $terminal -e "toggl-upload"; mode "default"
-        $bindsym m exec $terminal -e "toggl-report"; mode "default"
+        $bindsym u exec $term -e "toggl-upload"; mode "default"
+        $bindsym m exec $term -e "toggl-report"; mode "default"
+        $bindsym Shift+m exec $term -e "toggl-report '-1 month'"; mode "default"
 
         # Return to default mode.
         $bindsym Escape mode "default"
