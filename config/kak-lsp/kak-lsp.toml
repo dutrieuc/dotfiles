@@ -315,7 +315,7 @@ command = "lemminx"
 [language.markdown]
 filetypes = ["markdown"]
 roots = [".zk"]
-command = "zk"
+command = "/home/cydu/workspace/zk/zk"
 args = ["lsp", "--log", "/tmp/zk-lsp.log"]
 
 # Semantic tokens support

@@ -4,6 +4,7 @@ evaluate-commands %sh{
 }
 evaluate-commands %sh{
     kak-lsp --kakoune -s $kak_session
+	set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
 }
 # Plug
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
@@ -66,8 +67,8 @@ hook global WinSetOption filetype=(rust|python|zig|ruby|xml|js) %{
 hook global WinSetOption filetype=python %{
     set-option window formatcmd 'black -l 120 -q  -'
 }
-hook global WinSetOption filetype=markdown %{
-    set window formatcmd 'prettier --parser markdown --print-width 72 --prose-wrap always'
+hook global WinSetOption filetype=(markdown|git-commit) %{
+	set window formatcmd 'prettier --parser markdown --print-width 72 --prose-wrap always'
 }
 
 # copy to system clipboard

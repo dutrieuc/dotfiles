@@ -77,7 +77,7 @@
     ~/.config/spotifyd/spotifyd.conf:
         path: config/spotifyd/spotifyd.conf
 
-    ~/.zk/config.toml:
+    ~/.config/zk/config.toml:
         path: zk/config.toml
 
 - create:

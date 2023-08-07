@@ -1,6 +1,7 @@
 #!/bin/sh
 cd ~/tools-odoo/toggl_to_odoo/
-datetime=$(date -d "`date +%Y%m01`" +%Y-%m-%d)
-python3 -m toggl_to_odoo convert -ds "$datetime" --merge toggl2odoo 
+datestart=$(date -d "`date +%Y%m01` $1"  +%Y-%m-%d)
+dateend=$(date -d "$datestart +1 month -1 day"  +%Y-%m-%d)
+python3 -m toggl_to_odoo convert -ds "$datestart" -du "$dateend" --merge toggl2odoo
 read
 exit 0
