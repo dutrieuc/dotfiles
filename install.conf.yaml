@@ -13,8 +13,8 @@
 
     ~/.gitconfig:
     ~/.scripts:
-    ~/.local/bin:
-        path: localbin/*
+    ~/bin:
+        path: bin/*
         create: true
         glob: true
     ~/.profile:
@@ -35,34 +35,14 @@
     ~/.config/kak/colors/:
         path: themes/kakoune/colors/*
         glob: true
-    ~/.config/kak/plugins/powerline.kak/rc/themes/dracula.kak:
-        path: themes/kakoune_powerline/dracula.kak
     ~/.config/pycodestyle:
         path: config/pycodestyle
     ~/.config/oscout/bindings:
         path: config/oscout/bindings
 
-    ~/.config/sway/config:
-        path: config/sway/config
+    ~/.config/sway:
+        path: config/sway
         force: true
-    ~/.config/sway/definitions.d/user_definition.conf:
-        path: i3/definition.conf
-    ~/.config/sway/template:
-        path: i3/template
-    ~/.config/sway/outputs/:
-        path: i3/outputs/*
-        create: true
-        glob: true
-    ~/.config/sway/modes/:
-        path: i3/modes/*
-        create: true
-        glob: true
-    ~/.config/sway/config.d/:
-        path: i3/config.d/*
-        create: true
-        glob: true
-    ~/.config/sway/workspace-3.json:
-        path: i3/workspace-3.json
     ~/.config/kanshi/config:
         path: kanshi/config
     ~/.config/mako/config:
@@ -81,7 +61,7 @@
         path: zk/config.toml
 
 - create:
-    - ~/.local/bin/
+    - ~/bin/
     - ~/.config/kak/plugins/
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
