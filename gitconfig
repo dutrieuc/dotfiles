@@ -10,3 +10,5 @@
 	fpush = push --force-with-lease
 [pull]
 	rebase = true
+[rerere]
+	enabled = false

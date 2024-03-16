@@ -1,5 +1,5 @@
 profile docked {
-    output eDP-1 enable position 1920,320 scale 1.25
+    output eDP-1 enable position 2560,320 scale 1.25
     output DP-6 position 0,0
     exec swaymsg output eDP-1 bg ~/Pictures/wallpapers/wallpapers-gen/cliff-right.png  fill
     exec swaymsg "output 'LG Electronics 27EA63 ' bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill"
@@ -11,7 +11,7 @@ profile docked {
 
 profile dockedbis {
     output eDP-1 enable position 1920,320 scale 1.25
-    output DP-7 position 0,0
+    output DP-6 position 0,0
 }
 
 profile bare_hdmi {

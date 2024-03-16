@@ -29,6 +29,8 @@ alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 
+alias op="xdg-open"
+
 ex ()
 {
   if [ -f $1 ] ; then
