@@ -1,6 +1,8 @@
 export EDITOR="kcr edit"
 export TERMINAL=foot
+export BROWSER=/usr/bin/firefox
 
+export XDG_CURRENT_DESKTOP=sway
 export FZF_DEFAULT_OPTS='--multi --layout=reverse --preview-window=up:60%'
 # Most pure GTK3 apps use wayland by default, but some,
 # like Firefox, need the backend to be explicitely selected.
@@ -18,7 +20,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # set default shell and terminal
 export SHELL=/usr/bin/zsh
-export TERMINAL_COMMAND=/usr/share/sway/scripts/foot.sh
+export TERMINAL_COMMAND=/usr/bin/footclient
 
 # add default location for zeit.db
 export ZEIT_DB="$HOME/config/zeit.db"

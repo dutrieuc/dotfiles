@@ -3,7 +3,7 @@ cd ~/tools-odoo/toggl_to_odoo/
 echo "Uploading T.S."
 datetime=$(date -d "now - 14 days" +%Y-%m-%d)
 echo "On odoo.com"
-python3 -m toggl_to_odoo upload -ds "$datetime" --force -te project-tool --merge -u cydu@odoo.com -p $(gnome-keyring-query get odoo-api) toggl2odoo https://www.odoo.com openerp history.log
+python3 -m toggl_to_odoo upload -vv -ds "$datetime" --force -te project-tool --merge -u cydu@odoo.com -p $(gnome-keyring-query get odoo-api) toggl2odoo https://www.odoo.com openerp history.log
 echo "On project-tool"
 python3 -m toggl_to_odoo upload -ds "$datetime" --force -ti project-tool --merge -u cydu@odoo.com -p $(gnome-keyring-query get odoo) toggl2odoo https://project-tool.odoo.com  odoo-ps-psbe-large-project-tool-14-0-master-1964163 history-project-tool
 echo "Done uploading"
