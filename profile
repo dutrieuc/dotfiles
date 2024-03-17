@@ -1,3 +1,4 @@
+export PATH=~/.local/bin:$PATH
 export EDITOR="kcr edit"
 export TERMINAL=foot
 export BROWSER=/usr/bin/firefox
@@ -19,7 +20,7 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 # set default shell and terminal
-export SHELL=/usr/bin/zsh
+export SHELL=/usr/bin/fish
 export TERMINAL_COMMAND=/usr/bin/footclient
 
 # add default location for zeit.db
