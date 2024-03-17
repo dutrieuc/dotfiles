@@ -7,7 +7,7 @@
 	url = https://github.com/dracula/dunst.git
 [submodule "themes/kakoune"]
 	path = themes/kakoune
-	url = git@github.com:dutrieuc/kakoune.git
+	url = git@github.com:dracula/kakoune.git
 [submodule "themes/rofi"]
 	path = themes/rofi
 	url = https://github.com/dracula/rofi
