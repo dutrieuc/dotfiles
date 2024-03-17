@@ -35,6 +35,8 @@
     ~/.config/kak/colors/:
         path: themes/kakoune/colors/*
         glob: true
+    ~/.config/kak/plugins/plug.kak/:
+        path: config/kak/plugins/plug.kak/
     ~/.config/pycodestyle:
         path: config/pycodestyle
     ~/.config/oscout/bindings:
