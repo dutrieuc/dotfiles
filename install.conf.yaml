@@ -7,9 +7,9 @@
 
 - link:
     ~/.zshrc:
-        force: true
-    ~/.config/zsh/p10k.zsh:
-        path: zsh/p10k.zsh
+        path: .zshrc
+    ~/.p10k.zsh:
+        path: .p10k.zsh
 
     ~/.gitconfig:
     ~/.scripts:
