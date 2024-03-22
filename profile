@@ -1,4 +1,4 @@
-export PATH=~/.local/bin:$PATH
+export PATH=~/bin:~/.local/bin:$PATH
 export EDITOR="kcr edit"
 export TERMINAL=foot
 export BROWSER=/usr/bin/firefox
