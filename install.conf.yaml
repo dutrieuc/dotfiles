@@ -45,6 +45,8 @@
     ~/.config/sway:
         path: config/sway
         force: true
+    ~/.config/waybar/:
+        path: config/waybar/
     ~/.config/kanshi/config:
         path: kanshi/config
     ~/.config/mako/config:
