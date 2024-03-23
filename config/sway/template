@@ -1,9 +1,19 @@
-set $gtk-theme Ant-Dracula
+
+set $gtk-theme Dracula
 set $icon-theme Papirus-Dark-Maia
 set $cursor-theme xcursor-breeze
 set $gui-font Roboto 11
 set $term-font RobotoMono Nerd Font 14
 set $kvantum-theme Dracula
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Dracula'
+#    gsettings set $gnome-schema icon-theme 'Dracula'
+    gsettings set $gnome-schema cursor-theme 'Dracula'
+    gsettings set $gnome-schema font-name 'Mononoki'
+}
 
 #$color0
 set $background-color $color0
