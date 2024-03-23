@@ -1,3 +1,7 @@
+bar {
+    swaybar_command waybar
+}
+
 # Autostart applications
 exec --no-startup-id pamac-tray
 exec eval $(gnome-keyring-daemon --start)
