@@ -155,7 +155,7 @@ define-command -override my-surround -docstring %{
 
 # - Normal mode 
 map -docstring 'client' global normal <c-t> ':new<ret>'
-map -docstring 'terminal' global normal <c-n> ':connect-terminal<ret>'
+map -docstring 'terminal' global normal <c-n> ':connect terminal<ret>'
 # map -docstring 'file explorer' global normal <c-e> ':connect panel sidetree --select %val{buffile}<ret>'
 map -docstring 'file picker' global normal <c-f> ':connect terminal-popup kcr fzf files<ret>'
 map -docstring 'buffer picker' global normal <c-b> ':connect terminal-popup kcr fzf buffers<ret>'
