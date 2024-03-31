@@ -39,6 +39,8 @@
         path: config/kak/plugins/plug.kak/
     ~/.config/pycodestyle:
         path: config/pycodestyle
+    ~/.config/oscout/env_var.sh:
+        path: config/oscout/env_var.sh
     ~/.config/oscout/bindings:
         path: config/oscout/bindings
 
