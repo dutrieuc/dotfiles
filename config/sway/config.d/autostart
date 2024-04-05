@@ -21,6 +21,7 @@ exec {
 }
 
 exec_always {
+	mako
     $kanshi
     $auto_xdg_keyboard
     $poweralert
