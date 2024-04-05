@@ -1,0 +1,10 @@
+#!/bin/sh
+case "${1%%:*}" in
+	http|https|*.pdf)
+		exec firefox "$1"
+		;;
+	*)
+		exec /usr/bin/xdg-open "$@"
+		;;
+esac
+
