@@ -19,6 +19,8 @@
         glob: true
     ~/.profile:
         force: true
+    ~/.zprofile:
+        force: true
     ~/.config/fontconfig/fonts.conf:
         path: config/fontconfig/fonts.conf
     ~/.config/alacritty/alacritty.yml:
