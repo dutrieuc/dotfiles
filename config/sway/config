@@ -18,6 +18,11 @@ include /etc/sway/inputs/*
 input type:keyboard xkb_layout us,fr
 input type:keyboard xkb_options "grp:ctrls_toggle,compose:ralt"
 
+input type:touchpad {
+    tap enabled
+    natural_scroll disabled
+}
+
 # include ~/.config/sway/outputs/*
 bindswitch --locked lid:on output eDP-1 disable
 bindswitch --locked lid:off output eDP-1 enable
