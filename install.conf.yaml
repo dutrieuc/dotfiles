@@ -55,6 +55,8 @@
         path: kanshi/config
     ~/.config/mako/config:
         path: config/mako/config
+    ~/.config/swaylock/config:
+        path: config/swaylock/config
 
     /etc/interception/udevmon.yaml:
         path: systemd/caps2esc/udevmon.yaml

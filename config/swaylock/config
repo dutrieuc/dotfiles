@@ -1,0 +1,5 @@
+ignore-empty-password
+show-failed-attempts
+indicator-radius=80
+indicator-thickness=15
+indicator-caps-lock
