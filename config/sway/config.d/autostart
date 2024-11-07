@@ -1,6 +1,3 @@
-bar {
-    swaybar_command waybar
-}
 
 # Autostart applications
 exec --no-startup-id pamac-tray
@@ -9,15 +6,14 @@ exec eval $(gnome-keyring-daemon --start)
 exec {
     $xdg-dirs
     $swayidle
-    $swappy_notify
-    $autostart_dex
-    $flashfocus
-    $wlsunset
-    $autotiling
     $foot_server
     $cliphist_store
-    $cliphist_watch
-    $workspace_icons
+#    $wlsunset
+#    $swappy_notify
+#    $autostart_dex
+#    $flashfocus
+#    $autotiling
+#    $workspace_icons
 }
 
 exec_always {
@@ -31,7 +27,6 @@ exec_always {
     $create_rofi_config
     $swayr_daemon
 }
-
 
 # Startup apps
 assign [class="discord"] $ws1

@@ -39,3 +39,9 @@ include /etc/sway/config.d/*
 
 # user config
 include $HOME/.config/sway/config.d/*
+
+bar {
+    swaybar_command waybar
+}
+
+

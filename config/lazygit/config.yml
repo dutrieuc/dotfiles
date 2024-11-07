@@ -1,0 +1,4 @@
+os:
+  edit: 'kcr edit {{filename}}'
+  editAtLine: 'kcr edit +{{line}} -- {{filename}}'
+  editInTerminal: true
