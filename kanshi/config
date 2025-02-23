@@ -1,3 +1,8 @@
+profile pontoise {
+    output eDP-1 enable position 0,100 scale 1.25
+    output "Acer Technologies G236HL LVNEE0052400" position 1536,0 
+}
+
 profile docked {
     output eDP-1 enable position 2560,320 scale 1.25
     output DP-6 position 0,0
@@ -9,9 +14,14 @@ profile docked {
     # exec swaymsg workspace 3 output 'Goldstar Company Ltd 24M45 SerialNumber'
 }
 
+profile projector {
+    output eDP-1 enable position 0,0
+    output "LG Electronics LG PROJECTOR 0x01010101" mode 1920x1080 position 1920,0
+}
+
 profile bare_hdmi {
     output eDP-1 enable position 2560,320 scale 1.25
-    output HDMI-A-1 position 0,0
+    output HDMI-A-1 position 0,0 mode 2560x1440
 }
 
 profile bare_t4 {
