@@ -2,10 +2,8 @@
 evaluate-commands %sh{
     kcr init kakoune
 }
-evaluate-commands %sh{
-    kak-lsp --kakoune -s $kak_session
-	set global lsp_cmd "kak-lsp -s %val{session} -vvv --log /tmp/kak-lsp.log"
-}
+eval %sh{kak-lsp}
+
 # Plug
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 plug "andreyorst/plug.kak" noload
