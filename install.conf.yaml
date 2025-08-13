@@ -57,6 +57,8 @@
         path: config/mako/config
     ~/.config/swaylock/config:
         path: config/swaylock/config
+    ~/.config/kanata/:
+        path: config/kanata/
 
     /etc/interception/udevmon.yaml:
         path: systemd/caps2esc/udevmon.yaml
