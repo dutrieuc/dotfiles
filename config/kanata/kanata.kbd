@@ -46,10 +46,26 @@
 ;; i.e. you cannot live-reload and switch keyboard devices.
 
 (deflayer navigation
+  _
   tab  home up   end  pgup   lrld   @-  7   8   9   @/
-  caps lft  down rght pgdn          @:  4   5   6   0
+  caps @slft  @ddown @frght pgdn          @:  @44   @55   @66   0
   XX voldwn mute volu S-tab   _     @.  1   2   3   @,
-            del               _            esc
+            @sdel      _         _            esc
+)
+
+ 
+(defalias
+  sdel (tap-hold-press $tto $hto del lsft)
+
+  ;; Home-row mods
+  ;; Must be hold long enough (300ms) to become a modifier.
+  slft (tap-hold $tto $hto lft lmet)
+  ddown (tap-hold $tto $hto down lalt)
+  frght (tap-hold $tto $hto rght lctl)
+  44 (tap-hold $tto $hto 4 rctl)
+  55 (tap-hold $tto $hto 5 lalt)
+  66 (tap-hold $tto $hto 6 rmet)
+
 )
 
 ;; vim: set ft=lisp

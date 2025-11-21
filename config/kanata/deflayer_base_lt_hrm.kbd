@@ -1,16 +1,18 @@
 ;; Base layer: layer-taps under the thumbs + home-row mods on SDF and JKL
 
 (deflayer base
+  esc
   q    w    e    r    t    _    y    u    i    o    p
   a    @ss  @dd  @ff  g         h    @jj  @kk  @ll  ;
   z    x    c    v    b   102d  n    m    ,    .    /
-            @sft          @nav            @alt
+            @sft   @enav       @nav            @alt
 )
 
 (defalias
   ;; Main mod-tap: VimNav layer when hold, Space when tapped.
   ;; The space key must be hold long enough (300ms) to become a layer shift.
   nav (tap-hold $tto $hto spc (layer-while-held navigation))
+  enav (tap-hold $tto $hto esc (layer-while-held navigation))
 
   ;; Space-cadet thumb keys: Shift/BackSpace, AltGr/Escape
   ;;  - acts as a modifier by default, or as BS/Ret when tapped separately;
