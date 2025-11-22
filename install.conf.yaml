@@ -59,10 +59,6 @@
         path: config/swaylock/config
     ~/.config/kanata/:
         path: config/kanata/
-
-    /etc/interception/udevmon.yaml:
-        path: systemd/caps2esc/udevmon.yaml
-
     ~/.config/rofi/config.rasi:
         path: themes/rofi/theme/config1.rasi
 
