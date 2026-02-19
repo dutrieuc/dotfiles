@@ -115,17 +115,6 @@ $bindsym $mod+Shift+8 move container to workspace $ws8, workspace $ws8
 $bindsym $mod+Shift+9 move container to workspace $ws9, workspace $ws9
 $bindsym $mod+Shift+0 move container to workspace $ws10, workspace $ws10
 
-## Launch // Open launcher in a new workspace ##
-bindsym $mod+Shift+d exec /usr/share/sway/scripts/first-empty-workspace.py --switch, exec $menu
-
-## Navigation // Switch to a new workspace ##
-bindsym $mod+n exec /usr/share/sway/scripts/first-empty-workspace.py --switch
-
-## Action // Move focused window to a new workspace ##
-bindsym $mod+Shift+n exec /usr/share/sway/scripts/first-empty-workspace.py --move
-
-## Action // Move focused window to a new workspace and switch there ##
-bindsym $mod+Shift+m exec /usr/share/sway/scripts/first-empty-workspace.py --move --switch
 
 #
 # Layout stuff:
@@ -162,9 +151,6 @@ bindsym $mod+a focus parent
 
 ## Launch // Toggle Help ##
 bindsym $mod+question exec $help
-
-## Launch // Open Support ##
-# bindsym $mod+Shift+s exec xdg-open https://github.com/Manjaro-Sway/manjaro-sway/blob/main/SUPPORT.md
 
 default_border pixel 1
 hide_edge_borders smart

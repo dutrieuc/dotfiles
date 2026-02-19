@@ -16,8 +16,8 @@ include $HOME/.config/sway/definitions.d/user_definition.conf
 
 include /etc/sway/inputs/*
 input type:keyboard {
-	xkb_layout us,fr
-    xkb_variant ,ergol
+	xkb_layout fr,us
+    xkb_variant ergol,
 	xkb_options nbsp:none
 }
 
