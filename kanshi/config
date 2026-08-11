@@ -3,6 +3,11 @@ profile pontoise {
     output "Acer Technologies G236HL LVNEE0052400" position 1536,0 
 }
 
+profile prisches {
+    output eDP-1 enable position 0,100 scale 1
+    output "Technical Concepts Ltd      DTV      0x01010101" position 1920,0 mode 1360x768 scale 0.9
+}
+
 profile docked {
     output eDP-1 enable position 2560,320 scale 1.25
     output DP-6 position 0,0
@@ -24,14 +29,10 @@ profile bare_hdmi {
     output HDMI-A-1 position 0,0 mode 2560x1440
 }
 
+
 profile bare_t4 {
     output DP-6 position 0,0
     output eDP-1 position 0,2080
-}
-
-profile {
-    output eDP-1 position 0,0
-    exec swaymsg output eDP-1 bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill
 }
 
 profile desktop {
@@ -39,4 +40,8 @@ profile desktop {
 	output HDMI-A-1 disable
 }
 
+profile base {
+    output eDP-1 position 0,0 scale 1
+    exec swaymsg output eDP-1 bg ~/Pictures/wallpapers/wallpapers-gen/cliff-center.png  fill
+}
 

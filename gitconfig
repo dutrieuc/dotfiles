@@ -3,6 +3,7 @@
 	name = Cyril Dutrieux (cydu)
 [core]
 	editor = kak
+	pager = delta
 [alias]
 	g = grep --break --heading --line-number
     lg = log --graph --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
@@ -14,3 +15,20 @@
 	rebase = true
 [rerere]
 	enabled = false
+[safe]
+	directory = /opt/flutter
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[submodule]
+	recurse = true
+[pack]
+	threads = 3
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+[merge]
+	conflictStyle = zdiff3
