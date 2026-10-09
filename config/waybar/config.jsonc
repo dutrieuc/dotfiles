@@ -18,7 +18,7 @@
     "position": "top",
 
     "modules-left": ["custom/menu", "sway/workspaces", "custom/scratchpad"],
-    "modules-center": ["custom/wf-recorder", "sway/mode"],
+    "modules-center": ["custom/wf-recorder", "sway/mode", "custom/timew"],
     "modules-right": [
         // informational
         "sway/language",
@@ -38,6 +38,7 @@
         "custom/dnd",
         "pulseaudio",
         "backlight",
+
 
         "tray",
         "clock"
@@ -258,6 +259,21 @@
         "on-click": "/bin/sh /usr/share/sway/scripts/zeit.sh click; pkill -RTMIN+10 waybar",
         "exec-if": "[ -x \"$(command -v zeit)\" ]",
         "signal": 10
+    },
+
+    "custom/timew": {
+        "interval": 10,
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "tracking": "󱎫",
+            "stopped": "󰔛"
+        },
+        "exec": "if [ \"$(timew get dom.active)\" = \"1\" ]; then tags=$(timew get dom.active.json | jq -r '.tags // [] | join(\", \")'); dur=$(timew get dom.active.duration | sed 's/^P//;s/T//' | tr 'DHMS' 'dhms' | sed 's/[0-9]*s$//'); printf '{\"alt\":\"tracking\",\"class\":\"tracking\",\"tooltip\":\"tracking %s for %s\r(Click to stop)\"}' \"${tags:-untagged}\" \"${dur:-0m}\"; else printf '{\"alt\":\"stopped\",\"class\":\"stopped\",\"tooltip\":\"not tracking\r(Click to resume last interval)\"}'; fi",
+        "exec-if": "[ -x \"$(command -v timew)\" ] && [ -d \"${TIMEWARRIORDB:-$HOME/.local/share/timewarrior}\" ]",
+        "on-click": "[ \"$(timew get dom.active)\" = \"1\" ] && timew stop || timew continue; pkill -RTMIN+12 waybar",
+        "on-click-right": "swaymsg exec \\$term_float twe edit",
+        "signal": 12
     },
 
     "custom/dnd": {
