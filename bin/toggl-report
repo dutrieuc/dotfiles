@@ -1,8 +1,83 @@
 #!/bin/sh
-cd ~/local/toggl_to_odoo/
-. ./venv/bin/activate
-datestart=$(date -d "`date +%Y%m01` $1"  +%Y-%m-%d)
-dateend=$(date -d "$datestart +1 month -1 day"  +%Y-%m-%d)
-python3 -m toggl_to_odoo convert -ds "$datestart" -du "$dateend" -te freelance --merge toggl2odoo
-read
-exit 0
+#
+# Show the timesheet lines for one month or week, with a total in work days.
+#
+# Nothing is uploaded: this is `timew_to_odoo convert`, a preview of what
+# upload.sh would send. The filters below must stay in step with upload.sh,
+# or the preview does not describe the upload.
+#
+# Usage: report.sh [PERIOD...]
+#
+#   PERIOD  all the arguments, joined; no quoting needed
+#           september     a month by name (abbreviations work)
+#           last month    anything `date -d` reads as an offset (-3 months)
+#           this week     a Monday-to-Sunday week, likewise by offset
+#           last week     (-2 weeks works too)
+#           (omitted)     the current month
+
+set -eu
+
+SNAP=120            # seconds
+EXCLUDE=freelance
+CONVERTER=timew2odoo
+
+# Print the first day of the month designated by $1, in %Y-%m-%d.
+month_start() {
+    case $1 in
+        "")
+            date +%Y-%m-01
+            ;;
+        *)
+            # An offset from this month ("last month", "-3 months"), or
+            # failing that a month name ("september", "sep").
+            date -d "$(date +%Y-%m-01) $1" +%Y-%m-%d 2>/dev/null ||
+                date -d "$1 1" +%Y-%m-%d 2>/dev/null
+            ;;
+    esac
+}
+
+# Print the Monday of the week designated by $1, in %Y-%m-%d.
+#
+# `date -d` has no notion of a week boundary -- "last week" is a flat -7
+# days -- so the Monday is computed from %u (1..7) and the offset applied
+# to it.
+week_start() {
+    monday=$(date -d "-$(($(date +%u) - 1)) days" +%Y-%m-%d)
+    case $1 in
+        week|weeks) set -- "this week" ;;   # bare "week" would mean +1 week
+    esac
+    date -d "$monday $1" +%Y-%m-%d 2>/dev/null
+}
+
+# Set $start, $end and $label for the period designated by $1.
+resolve() {
+    case $1 in
+        *week*)
+            start=$(week_start "$1") && [ -n "$start" ] || return 1
+            end=$(date -d "$start +6 days" +%Y-%m-%d)
+            label=$(date -d "$start" '+week %V, %G')
+            ;;
+        *)
+            start=$(month_start "$1") && [ -n "$start" ] || return 1
+            end=$(date -d "$start +1 month -1 day" +%Y-%m-%d)
+            label=$(date -d "$start" '+%B %Y')
+            ;;
+    esac
+}
+
+if ! resolve "$*"; then
+    echo "Not a month or a week: '$*'" >&2
+    exit 1
+fi
+
+echo "Timesheet for $label ($start to $end)"
+timew_to_odoo convert \
+    -ds "$start" -du "$end" \
+    --snap "$SNAP" -te "$EXCLUDE" --merge \
+    "$CONVERTER"
+
+# Keep the output readable when launched from a desktop entry.
+if [ -t 0 ]; then
+    printf '\nPress enter to close... '
+    read -r _ || true
+fi

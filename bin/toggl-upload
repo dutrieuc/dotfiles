@@ -1,11 +1,51 @@
 #!/bin/sh
-cd ~/local/toggl_to_odoo/
-. ./venv/bin/activate
-echo "Uploading T.S."
-datetime=$(date -d "now - 14 days" +%Y-%m-%d)
-echo "On odoo.com"
-python3 -m toggl_to_odoo upload -vv -ds "$datetime" --force -te freelance --merge -u cydu@odoo.com -p $(secret-tool lookup odoo.com apikey) toggl2odoo https://www.odoo.com openerp history.log
-# echo "On project-tool"
-# python3 -m toggl_to_odoo upload -ds "$datetime" --force -ti project-tool --merge -u cydu@odoo.com -p $(secret-tool lookup project-tool.odoo.com apikey) toggl2odoo https://project-tool.odoo.com  odoo-ps-psbe-large-project-tool-14-0-master-1964163 history-project-tool
-echo "Done uploading"
-exit 0
+#
+# Upload Timewarrior entries to Odoo timesheets.
+#
+# Usage: upload.sh [SINCE]
+#
+#   SINCE   anything `date -d` understands: "2026-09-01", "last monday",
+#           "3 weeks ago". Defaults to the last successful upload minus
+#           $OVERLAP_DAYS, or $FALLBACK_SINCE if this is the first run.
+#
+# Uploads are idempotent (entries are keyed by their Timewarrior start
+# timestamp in the history file), so overlapping windows are free: re-sending
+# a day that is already uploaded is a no-op.
+
+set -eu
+
+ODOO_USER="cydu@odoo.com"
+SNAP=120                        # seconds
+OVERLAP_DAYS=7                  # re-send this much, to catch retro-edited entries
+FALLBACK_SINCE="30 days ago"    # used when there is no recorded last upload
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/timew_to_odoo"
+LAST_UPLOAD="$STATE_DIR/last-upload"
+mkdir -p "$STATE_DIR"
+
+# --- work out the window --------------------------------------------------
+
+if [ $# -gt 0 ]; then
+    since=$(date -d "$1" +%F)
+elif [ -s "$LAST_UPLOAD" ]; then
+    since=$(date -d "$(cat "$LAST_UPLOAD") - $OVERLAP_DAYS days" +%F)
+else
+    since=$(date -d "$FALLBACK_SINCE" +%F)
+fi
+
+# --- upload ---------------------------------------------------------------
+
+apikey=$(secret-tool lookup www.odoo.com apikey) || apikey=""
+[ -n "$apikey" ] || { echo "No API key for www.odoo.com in the keyring" >&2; exit 1; }
+
+echo "Uploading timesheets to odoo.com since $since"
+# printf is a builtin, and timew_to_odoo reads the key off stdin:
+# the secret never reaches any process' argv.
+printf '%s\n' "$apikey" | timew_to_odoo upload -vv \
+    -ds "$since" --snap "$SNAP" --merge --force -te freelance \
+    -u "$ODOO_USER" \
+    timew2odoo https://www.odoo.com openerp "$STATE_DIR/history.log"
+
+# Only reached if the upload succeeded (set -e).
+date +%F > "$LAST_UPLOAD"
+echo "Done uploading (next run resumes from $(date -d "today - $OVERLAP_DAYS days" +%F))"

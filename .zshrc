@@ -164,3 +164,35 @@ fi
 
 export PGHOST=/var/run/postgresql/
 
+ts() {
+    local -a timew_args=()
+    local -a tag_args=()
+    local mode=timew
+
+    for arg in "$@"; do
+        if [[ "$arg" == -- ]]; then
+            mode=tags
+        elif [[ "$mode" == timew ]]; then
+            timew_args+=("$arg")
+        else
+            tag_args+=("$arg")
+        fi
+    done
+
+    local tags_output
+    if ! tags_output=$(odoo-tag "${tag_args[@]}"); then
+        echo "ts: failed to determine tags" >&2
+        return 1
+    fi
+
+    local -a tags
+	tags=(${=tags_output})
+
+    timew "${timew_args[@]}" "${tags[@]}"
+}
+
+if [[ -z $SSH_AUTH_SOCK ]]; then
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$UID}/ssh-agent.socket"
+fi
+
+source /home/cdutrieux/.config/broot/launcher/bash/br
