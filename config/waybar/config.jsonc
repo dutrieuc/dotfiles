@@ -151,7 +151,7 @@
         "tooltip-format": "{temperatureC}°C",
         "format-icons": ["", "", ""],
         "tooltip": true,
-        "on-click": "swaymsg exec \\$term_float watch sensors\""
+        "on-click": "swaymsg exec \\$term_float watch sensors"
     },
 
     "tray": {
@@ -188,7 +188,7 @@
             "one": "󰖯",
             "many": "󰖲"
         },
-        "exec": "/bin/sh /usr/share/sway/scripts/scratchpad.sh",
+        "exec": "/bin/sh $HOME/.config/sway/scripts/scratchpad.sh",
         "on-click": "swaymsg 'scratchpad show'",
         "signal": 7
     },
@@ -202,9 +202,9 @@
             "on": "󰌵",
             "off": "󰌶"
         },
-        "exec": "fallback_latitude=50.1 fallback_longitude=8.7 latitude= longitude= /usr/share/sway/scripts/sunset.sh",
-        "on-click": "/usr/share/sway/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
-        "exec-if": "/usr/share/sway/scripts/sunset.sh check",
+        "exec": "fallback_latitude=50.1 fallback_longitude=8.7 latitude= longitude= $HOME/.config/sway/scripts/sunset.sh",
+        "on-click": "$HOME/.config/sway/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
+        "exec-if": "$HOME/.config/sway/scripts/sunset.sh check",
         "signal": 6
     },
 
@@ -242,7 +242,7 @@
         "on-click": "swaymsg -q exec '$clipboard'; pkill -RTMIN+9 waybar",
         "on-click-right": "swaymsg -q exec '$clipboard-del'; pkill -RTMIN+9 waybar",
         "on-click-middle": "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar",
-        "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\r(Mid click to clear)'",
+        "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\\r(Mid click to clear)'",
         "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
         "signal": 9
     },
@@ -255,8 +255,8 @@
             "tracking": "󰖷",
             "stopped": "󰋣"
         },
-        "exec": "/bin/sh /usr/share/sway/scripts/zeit.sh status",
-        "on-click": "/bin/sh /usr/share/sway/scripts/zeit.sh click; pkill -RTMIN+10 waybar",
+        "exec": "/bin/sh $HOME/.config/sway/scripts/zeit.sh status",
+        "on-click": "/bin/sh $HOME/.config/sway/scripts/zeit.sh click; pkill -RTMIN+10 waybar",
         "exec-if": "[ -x \"$(command -v zeit)\" ]",
         "signal": 10
     },
@@ -269,8 +269,8 @@
             "tracking": "󱎫",
             "stopped": "󰔛"
         },
-        "exec": "if [ \"$(timew get dom.active)\" = \"1\" ]; then tags=$(timew get dom.active.json | jq -r '.tags // [] | join(\", \")'); dur=$(timew get dom.active.duration | sed 's/^P//;s/T//' | tr 'DHMS' 'dhms' | sed 's/[0-9]*s$//'); printf '{\"alt\":\"tracking\",\"class\":\"tracking\",\"tooltip\":\"tracking %s for %s\r(Click to stop)\"}' \"${tags:-untagged}\" \"${dur:-0m}\"; else printf '{\"alt\":\"stopped\",\"class\":\"stopped\",\"tooltip\":\"not tracking\r(Click to resume last interval)\"}'; fi",
-        "exec-if": "[ -x \"$(command -v timew)\" ] && [ -d \"${TIMEWARRIORDB:-$HOME/.local/share/timewarrior}\" ]",
+        "exec": "if [ \"$(timew get dom.active)\" = \"1\" ]; then tags=$(timew get dom.active.json | jq -r '.tags // [] | join(\", \")'); dur=$(timew get dom.active.duration | sed 's/^P//;s/T//' | tr 'DHMS' 'dhms' | sed 's/[0-9]*s$//'); printf '{\"alt\":\"tracking\",\"class\":\"tracking\",\"tooltip\":\"tracking %s for %s\\\\r(Click to stop)\"}' \"${tags:-untagged}\" \"${dur:-0m}\"; else printf '{\"alt\":\"stopped\",\"class\":\"stopped\",\"tooltip\":\"not tracking\\\\r(Click to resume last interval)\"}'; fi",
+        "exec-if": "[ -x \"$(command -v timew)\" ] && { [ -d \"${TIMEWARRIORDB:-${XDG_DATA_HOME:-$HOME/.local/share}/timewarrior}\" ] || [ -d \"$HOME/.timewarrior\" ]; }",
         "on-click": "[ \"$(timew get dom.active)\" = \"1\" ] && timew stop || timew continue; pkill -RTMIN+12 waybar",
         "on-click-right": "swaymsg exec \\$term_float twe edit",
         "signal": 12
@@ -288,5 +288,5 @@
         "on-click-right": "makoctl restore",
         "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"mode: %s\"}' $(makoctl mode | grep -q 'do-not-disturb' && echo dnd || echo default) $(makoctl mode | tail -1)",
         "signal": 11
-    },
+    }
 }

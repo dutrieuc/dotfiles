@@ -4,7 +4,7 @@ tracking=$(zeit tracking --no-colors)
 case $1'' in
 'status')
     text=$(echo "$tracking" | sed -z 's/\n/\\n/g' | grep -q 'tracking' && echo "tracking" || echo "stopped")
-    tooltip=$tracking'\r(zeit time tracker)'
+    tooltip=$(echo "$tracking" | sed -z 's/\n/\\n/g')'\r(zeit time tracker)'
     echo "{\"text\":\"$text\",\"tooltip\":\"$tooltip\",\"class\":\"$text\",\"alt\":\"$text\"}"
     ;;
 'click')
